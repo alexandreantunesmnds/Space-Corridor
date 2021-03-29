@@ -8,7 +8,7 @@
 /* TEST POUR GIT */
 #include "sdl2-light.h"
 
-
+/* ETAPE 21 */
 /**
  * \brief Largeur de l'écran
 */
