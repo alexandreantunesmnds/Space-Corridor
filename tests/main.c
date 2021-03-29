@@ -300,6 +300,6 @@ int main( int argc, char* args[] )
     //nettoyage final
     clean(window,renderer,&textures,&world);
     
-    
+    /*on retourne 0 pour annoncer que le programme n'a pas d'erreurs*/
     return 0;
 }
