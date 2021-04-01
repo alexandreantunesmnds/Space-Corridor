@@ -1,14 +1,12 @@
 /**
  * \file main.c
- * \brief Programme principal initial du niveau 0
+ * \brief Programme principal initial du niveau 1
  * \author Mathieu Constant
  * \version 1.0
- * \date 18 mars 2020
+ * \date 18 mars 2021
  */
-/* TEST POUR GIT */
 #include "sdl2-light.h"
 
-/* ETAPE 21 */
 /**
  * \brief Largeur de l'écran
 */
@@ -23,13 +21,25 @@
 #define SCREEN_HEIGHT 480
 
 /**
- * \brief Taille du sprite
+ * \brief Taille du vaisseau
 */
 
-#define SPRITE_SIZE 32
+#define SHIP_SIZE 32
 
 /**
- * \brief Pas de déplacement du sprite
+ * \brief Taille d'une météorite
+*/
+
+#define METEORITE_SIZE 32
+
+/**
+ * \brief Hauteur de la ligne d'arrivée
+*/
+
+#define FINISH_LINE_HEIGHT 10
+
+/**
+ * \brief Pas de déplacement horizontalement du vaisseau
 */
 
 #define MOVING_STEP 10
@@ -80,8 +90,8 @@ typedef struct world_s world_t;
 typedef struct sprite_s sprite_t;
 
 void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
-	sprite->x = SCREEN_WIDTH/4-SPRITE_SIZE/2;
-    sprite->y = SCREEN_HEIGHT/4-SPRITE_SIZE/2;
+	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
+    world->y = SHIP_SIZE*13.5;
 	w = 32;
 	h = 32;
 }
@@ -94,13 +104,12 @@ void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
  */
 
 
-void init_data(world_t * world,int SHIP_SIZE,sprite_t *sprite){
+void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
-
-    world->x = SCREEN_WIDTH/2-SPRITE_SIZE/2;
-    world->y = SCREEN_HEIGHT/2-SPRITE_SIZE/2;
+	
+	init_sprite();
 }
 
 
@@ -192,7 +201,6 @@ void handle_events(SDL_Event *event,world_t *world){
 void clean_textures(textures_t *textures){
     clean_texture(textures->background);
     clean_texture(textures->sprite);
-	clean_texture(textures->ship);
 }
 
 
