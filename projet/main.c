@@ -90,8 +90,6 @@ typedef struct world_s world_t;
 typedef struct sprite_s sprite_t;
 
 void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
-	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
-    world->y = SHIP_SIZE*13.5;
 	w = 32;
 	h = 32;
 }
@@ -108,8 +106,10 @@ void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
-	
-	init_sprite();
+	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
+    world->y = SHIP_SIZE*13.5;
+
+
 }
 
 
