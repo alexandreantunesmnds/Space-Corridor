@@ -72,11 +72,12 @@ struct world_s{
 	int ship;  /*!< Champ indiquant le vaisseau */
 };
 
-
-typedef struct world_s world_t;
 /**
  * \brief Type qui correspond aux données du monde
  */
+
+typedef struct world_s world_t;
+
  struct sprite_s{
 	 int x; /*!< Coordonnées x du vaisseau */
 	 int y; /*!< Coordonnées y du vaisseau */
@@ -191,6 +192,19 @@ void handle_events(SDL_Event *event,world_t *world){
          }
     }
 }
+
+/**
+ * \brief La fonction permet d'appliquer le sprite sur le renderer à une position donnée. La hauteur et la largeur est la même que celle de la texture.
+ * \param texture  la texture que l'on va appliquer
+ * \param renderer le renderer qui va recevoir la texture
+ * \param sprite va appliquer la texture associée au sprite sur le renderer à la position indiquée dans le sprite
+*/
+void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
+      apply_texture(texture, renderer, sprite->x, sprite->y);
+}
+
+
+
 
 
 /**
