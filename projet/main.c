@@ -51,6 +51,7 @@
 struct textures_s{
     SDL_Texture* background; /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* sprite; /*!< Texture liée au sprite joueur */
+	SDL_Texture* finish_line;
 };
 
 
@@ -67,9 +68,14 @@ typedef struct textures_s textures_t;
 
 struct world_s{
     int x; /*!< Coordonnées x du joueur */
-    int y; /*!< Coordonnées x du joueur */
+    int y; /*!< Coordonnées y du joueur */
+	int h; /*!< Hauteur du joueur */
+	int w; /*!< Largeur du joueur */
     int gameover; /*!< Champ indiquant si l'on est à la fin du jeu */
-	int ship;  /*!< Champ indiquant le vaisseau */
+	int spaceship;  /*!< Champ indiquant le vaisseau */
+	int finish_line;  /*!< Champ indiquant la ligne d'arrivée */
+	int finish_line_x;
+	int finish_line_y;
 };
 
 /**
@@ -83,16 +89,20 @@ typedef struct world_s world_t;
 	 int y; /*!< Coordonnées y du vaisseau */
 	 int h; /*!< Hauteur h du vaisseau */
 	 int w; /*!< Largeur w du vaisseau */
-	 SDL_Texture* spaceship;  /*!<Chargement du sprite du vaisseau */
+	 int finish_line_x;
+	 int finish_line_y;
+	 int finish_line;
 };
 
 
 
 typedef struct sprite_s sprite_t;
 
-void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
+void init_sprite(sprite_t *sprite, int x, int y, int w, int h,int finish_line_x,int finish_line_y){
 	w = 32;
 	h = 32;
+	x = SCREEN_WIDTH/2-SHIP_SIZE/2;
+    y = SHIP_SIZE*13.5;
 }
 
 
@@ -107,9 +117,11 @@ void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
+	world->w = 32;
+	world->h = 32;
 	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
     world->y = SHIP_SIZE*13.5;
-
+	world->finish_line_y = FINISH_LINE_HEIGHT /9;
 
 }
 
@@ -201,10 +213,8 @@ void handle_events(SDL_Event *event,world_t *world){
 */
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
       apply_texture(texture, renderer, sprite->x, sprite->y);
+	  apply_texture(texture, renderer, sprite->finish_line_x, sprite->finish_line_y);
 }
-
-
-
 
 
 /**
@@ -215,6 +225,7 @@ void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
 void clean_textures(textures_t *textures){
     clean_texture(textures->background);
     clean_texture(textures->sprite);
+	clean_texture(textures->finish_line);
 }
 
 
@@ -227,8 +238,8 @@ void clean_textures(textures_t *textures){
 
 void  init_textures(SDL_Renderer *renderer, textures_t *textures){
     textures->background = load_image( "ressources/space-background.bmp",renderer);
-    textures->sprite = load_image( "ressources/sprite.bmp",renderer);
 	textures->sprite = load_image( "ressources/spaceship.bmp",renderer);
+	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
 
     
 }
@@ -264,6 +275,7 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     //application des textures dans le renderer
     apply_background(renderer, textures);
     apply_texture(textures->sprite, renderer, world->x, world->y);
+	apply_texture(textures->finish_line, renderer, world->finish_line_x, world->finish_line_y);
     
     // on met à jour l'écran
     update_screen(renderer);
