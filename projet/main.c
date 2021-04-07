@@ -18,8 +18,7 @@
  * \brief Hauteur de l'écran
 */
 
-#define SCREEN_HEIGHT 480
-
+#define SCREEN_HEIGHT 480 
 /**
  * \brief Taille du vaisseau
 */
@@ -52,6 +51,7 @@ struct textures_s{
     SDL_Texture* background; /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* sprite; /*!< Texture liée au sprite joueur */
 	SDL_Texture* finish_line;
+    SDL_Texture* meteorite; /*!< Texture liée au météorites */
 };
 
 
@@ -60,6 +60,18 @@ struct textures_s{
 */
 
 typedef struct textures_s textures_t;
+
+
+ struct sprite_s{
+	 int x; /*!< Coordonnées x du vaisseau */
+	 int y; /*!< Coordonnées y du vaisseau */
+	 int h; /*!< Hauteur h du vaisseau */
+	 int w; /*!< Largeur w du vaisseau */
+	 int finish_line_x;
+	 int finish_line_y;
+	 int finish_line;
+};
+typedef struct sprite_s sprite_t;
 
 
 /**
@@ -76,6 +88,7 @@ struct world_s{
 	int finish_line;  /*!< Champ indiquant la ligne d'arrivée */
 	int finish_line_x;
 	int finish_line_y;
+    sprite_t mur;
 };
 
 /**
@@ -84,25 +97,11 @@ struct world_s{
 
 typedef struct world_s world_t;
 
- struct sprite_s{
-	 int x; /*!< Coordonnées x du vaisseau */
-	 int y; /*!< Coordonnées y du vaisseau */
-	 int h; /*!< Hauteur h du vaisseau */
-	 int w; /*!< Largeur w du vaisseau */
-	 int finish_line_x;
-	 int finish_line_y;
-	 int finish_line;
-};
-
-
-
-typedef struct sprite_s sprite_t;
-
-void init_sprite(sprite_t *sprite, int x, int y, int w, int h,int finish_line_x,int finish_line_y){
-	w = 32;
-	h = 32;
-	x = SCREEN_WIDTH/2-SHIP_SIZE/2;
-    y = SHIP_SIZE*13.5;
+void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
+    sprite->w = w;
+    sprite->h = h;
+    sprite->x = x;
+    sprite->y = y;
 }
 
 
@@ -117,11 +116,18 @@ void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
-	world->w = 32;
-	world->h = 32;
+    //on place le vaisseau
+	world->w = SHIP_SIZE;
+	world->h = SHIP_SIZE;
 	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
     world->y = SHIP_SIZE*13.5;
 	world->finish_line_y = FINISH_LINE_HEIGHT /9;
+    //on place le mur de météorites
+    world->x = SCREEN_WIDTH/2;
+    world->y = SCREEN_HEIGHT/2;
+    world->w = METEORITE_SIZE*3;
+    world->h = METEORITE_SIZE*7;
+
 
 }
 
@@ -226,6 +232,7 @@ void clean_textures(textures_t *textures){
     clean_texture(textures->background);
     clean_texture(textures->sprite);
 	clean_texture(textures->finish_line);
+    clean_texture(textures->meteorite);
 }
 
 
@@ -240,6 +247,7 @@ void  init_textures(SDL_Renderer *renderer, textures_t *textures){
     textures->background = load_image( "ressources/space-background.bmp",renderer);
 	textures->sprite = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
+    textures->meteorite = load_image( "ressources/meteorite.bmp",renderer);
 
     
 }
