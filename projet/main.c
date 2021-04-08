@@ -19,6 +19,7 @@
 */
 
 #define SCREEN_HEIGHT 480 
+
 /**
  * \brief Taille du vaisseau
 */
@@ -49,8 +50,8 @@
 
 struct textures_s{
     SDL_Texture* background; /*!< Texture liée à l'image du fond de l'écran. */
-    SDL_Texture* sprite; /*!< Texture liée au sprite joueur */
-	SDL_Texture* finish_line;
+    SDL_Texture* spaceship; /*!< Texture liée au vaisseau*/
+	SDL_Texture* finish_line;/*!< Texture liée à la ligne d'arrivée*/
     SDL_Texture* meteorite; /*!< Texture liée au météorites */
 };
 
@@ -111,11 +112,11 @@ void init_data(world_t * world){
     //on n'est pas à la fin du jeu
     world->gameover = 0;
     //on place le vaisseau
-    init_sprite(world->spaceship,SCREEN_WIDTH/2-SHIP_SIZE/2,SHIP_SIZE*13.5,SHIP_SIZE,SHIP_SIZE);
+    init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
     //On place la ligne d'arrivée 
-    init_sprite(world->finish_line,  ,) //On appelle w et h ou pas ?
+    init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
     //on place le mur de météorites
-    init_sprite(world->mur,SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE*3,METEORITE_SIZE*7)
+    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE*3,METEORITE_SIZE*7);
 }
 
 
@@ -161,16 +162,16 @@ void update_data(world_t *world){
  * \param world les données du monde
  */
 
-void handle_events(SDL_Event *event,world_t *world){
+   void handle_events(SDL_Event *event,world_t *world){
     Uint8 *keystates;
     while( SDL_PollEvent( event ) ) {
-        
+
         //Si l'utilisateur a cliqué sur le X de la fenêtre
         if (event->type == SDL_QUIT) {
             //On indique la fin du jeu
             world->gameover = 1;
         }
-       
+
          //si une touche est appuyée
          if(event->type == SDL_KEYDOWN){
             //si la touche appuyée est 'Echap'
@@ -178,25 +179,25 @@ void handle_events(SDL_Event *event,world_t *world){
                  printf("La touche Echap est appuyée\n");
                  exit(0);
               }
-            //si la touche appuyée est 'Z'
-             if(event->key.keysym.sym == SDLK_z){
-                 world->y -= MOVING_STEP;
+            //si la touche appuyée est 'flèche haut'
+             if(event->key.keysym.sym == SDLK_UP){
+                 world->spaceship.y -= MOVING_STEP;
               }
-              //si la touche appuyée est 'Q'
-             if(event->key.keysym.sym == SDLK_q){
-                 world->x -= MOVING_STEP;
+              //si la touche appuyée est 'flèche gauche'
+             if(event->key.keysym.sym == SDLK_LEFT){
+                 world->spaceship.x -= MOVING_STEP;
               }
-              //si la touche appuyée est 'S'
-             if(event->key.keysym.sym == SDLK_s){
-                 world->y += MOVING_STEP;
+              //si la touche appuyée est 'flèche bas'
+             if(event->key.keysym.sym == SDLK_DOWN){
+                 world->spaceship.y += MOVING_STEP;
               }
-             //si la touche appuyée est 'D'
-             if(event->key.keysym.sym == SDLK_d){
-                 world->x += MOVING_STEP;
-              }
+             //si la touche appuyée est 'flèche droite'
+             if(event->key.keysym.sym == SDLK_RIGHT){
+                 world->spaceship.x += MOVING_STEP;
+             }
          }
     }
-}
+    }
 
 /**
  * \brief La fonction permet d'appliquer le sprite sur le renderer à une position donnée. La hauteur et la largeur est la même que celle de la texture.
@@ -217,7 +218,7 @@ void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
 
 void clean_textures(textures_t *textures){
     clean_texture(textures->background);
-    clean_texture(textures->sprite);
+    clean_texture(textures->spaceship);
 	clean_texture(textures->finish_line);
     clean_texture(textures->meteorite);
 }
@@ -230,9 +231,9 @@ void clean_textures(textures_t *textures){
  * \param textures les textures du jeu
 */
 
-void  init_textures(SDL_Renderer *renderer, textures_t *textures){
+void init_textures(SDL_Renderer *renderer, textures_t *textures){
     textures->background = load_image( "ressources/space-background.bmp",renderer);
-	textures->sprite = load_image( "ressources/spaceship.bmp",renderer);
+	textures->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
     textures->meteorite = load_image( "ressources/meteorite.bmp",renderer);
 
@@ -269,8 +270,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     
     //application des textures dans le renderer
     apply_background(renderer, textures);
-    apply_texture(textures->sprite, renderer, world->x, world->y);
-	apply_texture(textures->finish_line, renderer, world->finish_line_x, world->finish_line_y);
+    apply_texture(textures->spaceship, renderer, world->spaceship.x, world->spaceship.y);
+	apply_texture(textures->finish_line, renderer, world->finish_line.x, world->finish_line.y);
     
     // on met à jour l'écran
     update_screen(renderer);
