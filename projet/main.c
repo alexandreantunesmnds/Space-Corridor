@@ -79,15 +79,9 @@ typedef struct sprite_s sprite_t;
 */
 
 struct world_s{
-    int x; /*!< Coordonnées x du joueur */
-    int y; /*!< Coordonnées y du joueur */
-	int h; /*!< Hauteur du joueur */
-	int w; /*!< Largeur du joueur */
     int gameover; /*!< Champ indiquant si l'on est à la fin du jeu */
-	int spaceship;  /*!< Champ indiquant le vaisseau */
-	int finish_line;  /*!< Champ indiquant la ligne d'arrivée */
-	int finish_line_x;
-	int finish_line_y;
+	sprite_t spaceship;  /*!< Champ indiquant le vaisseau */
+	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
     sprite_t mur;
 };
 
@@ -117,18 +111,11 @@ void init_data(world_t * world){
     //on n'est pas à la fin du jeu
     world->gameover = 0;
     //on place le vaisseau
-	world->w = SHIP_SIZE;
-	world->h = SHIP_SIZE;
-	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
-    world->y = SHIP_SIZE*13.5;
-	world->finish_line_y = FINISH_LINE_HEIGHT /9;
+    init_sprite(world->spaceship,SCREEN_WIDTH/2-SHIP_SIZE/2,SHIP_SIZE*13.5,SHIP_SIZE,SHIP_SIZE);
+    //On place la ligne d'arrivée 
+    init_sprite(world->finish_line,  ,) //On appelle w et h ou pas ?
     //on place le mur de météorites
-    world->x = SCREEN_WIDTH/2;
-    world->y = SCREEN_HEIGHT/2;
-    world->w = METEORITE_SIZE*3;
-    world->h = METEORITE_SIZE*7;
-
-
+    init_sprite(world->mur,SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE*3,METEORITE_SIZE*7)
 }
 
 
@@ -317,7 +304,7 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, textures_t *textures, wo
 
 void init(SDL_Window **window, SDL_Renderer ** renderer, textures_t *textures, world_t * world){
     init_sdl(window,renderer,SCREEN_WIDTH, SCREEN_HEIGHT);
-	 init_data(world);
+	init_data(world);
     init_textures(*renderer,textures);
 }
 
