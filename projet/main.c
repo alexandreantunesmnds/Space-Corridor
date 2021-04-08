@@ -45,13 +45,21 @@
 #define MOVING_STEP 10
 
 /**
+ * \brief Pas de déplacement verticalement du monde
+*/
+
+#define INITIAL_SPEED 12
+
+/**
  * \brief Représentation pour stocker les textures nécessaires à l'affichage graphique
 */
+
+
 
 struct textures_s{
     SDL_Texture* background; /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* sprite; /*!< Texture liée au sprite joueur */
-	SDL_Texture* finish_line;
+	SDL_Texture* finish_line; /*!< Texture liée à la ligne d'arrivée */
 };
 
 
@@ -67,15 +75,16 @@ typedef struct textures_s textures_t;
 */
 
 struct world_s{
-    int x; /*!< Coordonnées x du joueur */
     int y; /*!< Coordonnées y du joueur */
+	int x; /*!< Coordonnées x du joueur */
 	int h; /*!< Hauteur du joueur */
 	int w; /*!< Largeur du joueur */
     int gameover; /*!< Champ indiquant si l'on est à la fin du jeu */
 	int spaceship;  /*!< Champ indiquant le vaisseau */
 	int finish_line;  /*!< Champ indiquant la ligne d'arrivée */
-	int finish_line_x;
-	int finish_line_y;
+	int finish_line_x; /*!< Champ indiquant la ligne d'arrivée sur l'axe x */
+	int finish_line_y; /*!< Champ indiquant la ligne d'arrivée sur l'axe y*/
+	int move_vy;/*!< Champ indiquant la vitesse de déplacement vertical vy*/
 };
 
 /**
@@ -89,20 +98,21 @@ typedef struct world_s world_t;
 	 int y; /*!< Coordonnées y du vaisseau */
 	 int h; /*!< Hauteur h du vaisseau */
 	 int w; /*!< Largeur w du vaisseau */
-	 int finish_line_x;
-	 int finish_line_y;
-	 int finish_line;
+	 int finish_line_y; /*!< Coordonnées y de la ligne d'arrivée */
+	 int finish_line_x; /*!< Coordonnées x de la ligne d'arrivée */
+	 int finish_line; /*!< Ligne d'arrivée */
 };
 
 
 
 typedef struct sprite_s sprite_t;
 
-void init_sprite(sprite_t *sprite, int x, int y, int w, int h,int finish_line_x,int finish_line_y){
-	w = 32;
-	h = 32;
-	x = SCREEN_WIDTH/2-SHIP_SIZE/2;
-    y = SHIP_SIZE*13.5;
+void init_sprite(sprite_t *sprite, int x, int y, int w, int h,int finish_line_y,int move_vy){
+	sprite ->w = w;
+	sprite ->h = h;
+	sprite ->x = x;
+    sprite ->y = y;
+	sprite ->finish_line_y = move_vy + finish_line_y;
 }
 
 
@@ -112,16 +122,16 @@ void init_sprite(sprite_t *sprite, int x, int y, int w, int h,int finish_line_x,
  * \param world les données du monde
  */
 
-
 void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
-	world->w = 32;
-	world->h = 32;
+	world->w = SHIP_SIZE;
+	world->h = SHIP_SIZE;
 	world->x = SCREEN_WIDTH/2-SHIP_SIZE/2;
     world->y = SHIP_SIZE*13.5;
-	world->finish_line_y = FINISH_LINE_HEIGHT /9;
+	world->move_vy = INITIAL_SPEED;
+	
 
 }
 
@@ -156,8 +166,8 @@ int is_game_over(world_t *world){
  * \param les données du monde
  */
 
-void update_data(world_t *world){
-/* A COMPLETER */
+void update_data(world_t * world){
+ world->finish_line_y = move_vy + finish_line_y;
 }
 
 
