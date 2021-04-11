@@ -48,6 +48,12 @@
  * \brief Représentation pour stocker les textures nécessaires à l'affichage graphique
 */
 
+/**
+  * \brief Vitesse initiale de déplacement vertical des éléments du jeu 
+*/
+
+#define INITIAL_SPEED 2
+
 struct textures_s{
     SDL_Texture* background; /*!< Texture liée à l'image du fond de l'écran. */
     SDL_Texture* spaceship; /*!< Texture liée au vaisseau*/
@@ -68,9 +74,6 @@ typedef struct textures_s textures_t;
 	 int y; /*!< Coordonnées y du vaisseau */
 	 int h; /*!< Hauteur h du vaisseau */
 	 int w; /*!< Largeur w du vaisseau */
-	 int finish_line_x;
-	 int finish_line_y;
-	 int finish_line;
 };
 typedef struct sprite_s sprite_t;
 
@@ -83,7 +86,8 @@ struct world_s{
     int gameover; /*!< Champ indiquant si l'on est à la fin du jeu */
 	sprite_t spaceship;  /*!< Champ indiquant le vaisseau */
 	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
-    sprite_t mur;
+    sprite_t mur; /*!< Champ indiquant le mur de météorites */
+    int vy; /*!< Champ indiquant le déplacement des objets du monde*/
 };
 
 /**
@@ -112,9 +116,11 @@ void init_data(world_t * world){
     //on n'est pas à la fin du jeu
     world->gameover = 0;
     //on place le vaisseau
-    init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
+    init_sprite(&(world->spaceship),SCREEN_WIDTH,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
     //On place la ligne d'arrivée 
     init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
+    //on initialise la vitesse de déplacement
+    world->vy = INITIAL_SPEED;
     //on place le mur de météorites
     init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE*3,METEORITE_SIZE*7);
 }
@@ -151,7 +157,7 @@ int is_game_over(world_t *world){
  */
 
 void update_data(world_t *world){
-/* A COMPLETER */
+    world->finish_line.y += world->vy;
 }
 
 
@@ -206,8 +212,7 @@ void update_data(world_t *world){
  * \param sprite va appliquer la texture associée au sprite sur le renderer à la position indiquée dans le sprite
 */
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
-      apply_texture(texture, renderer, sprite->x, sprite->y);
-	  apply_texture(texture, renderer, sprite->finish_line_x, sprite->finish_line_y);
+      apply_texture(texture, renderer, sprite->x - SCREEN_WIDTH/2, sprite->y);
 }
 
 
@@ -270,9 +275,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     
     //application des textures dans le renderer
     apply_background(renderer, textures);
-    apply_texture(textures->spaceship, renderer, world->spaceship.x, world->spaceship.y);
-	apply_texture(textures->finish_line, renderer, world->finish_line.x, world->finish_line.y);
-    
+    apply_sprite(textures->spaceship, renderer, &(world->spaceship));
+    apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     // on met à jour l'écran
     update_screen(renderer);
 }
