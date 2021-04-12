@@ -122,7 +122,8 @@ void init_data(world_t * world){
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
-    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE*3,METEORITE_SIZE*7);
+    
+    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
 }
 
 
@@ -188,6 +189,7 @@ void update_data(world_t *world){
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
                  world->spaceship.y -= MOVING_STEP;
+                 world->vy += 1;
               }
               //si la touche appuyée est 'flèche gauche'
              if(event->key.keysym.sym == SDLK_LEFT){
@@ -196,6 +198,7 @@ void update_data(world_t *world){
               //si la touche appuyée est 'flèche bas'
              if(event->key.keysym.sym == SDLK_DOWN){
                  world->spaceship.y += MOVING_STEP;
+                 world->vy -= 1;
               }
              //si la touche appuyée est 'flèche droite'
              if(event->key.keysym.sym == SDLK_RIGHT){
@@ -277,6 +280,7 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_background(renderer, textures);
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
+    apply_sprite(textures->meteorite, renderer,&(world->mur));
     // on met à jour l'écran
     update_screen(renderer);
 }
