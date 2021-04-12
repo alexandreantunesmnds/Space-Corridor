@@ -68,13 +68,18 @@ struct textures_s{
 
 typedef struct textures_s textures_t;
 
-
+/**
+ * \brief Représentation des sprite
+*/
  struct sprite_s{
 	 int x; /*!< Coordonnées x du vaisseau */
 	 int y; /*!< Coordonnées y du vaisseau */
 	 int h; /*!< Hauteur h du vaisseau */
 	 int w; /*!< Largeur w du vaisseau */
 };
+/**
+ * \brief Type qui correspond aux sprites
+ */
 typedef struct sprite_s sprite_t;
 
 
@@ -96,6 +101,14 @@ struct world_s{
 
 typedef struct world_s world_t;
 
+/**
+ * \brief La fonction initialise les sprites
+ * \param sprite les données du sprite
+ * \param x coordonnées en abscisse
+ * \param y coordonnées en ordonnée
+ * \param w taille du sprite en largeur
+ * \param h taille du sprite en hauteur
+ */
 void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
     sprite->w = w;
     sprite->h = h;
@@ -104,6 +117,17 @@ void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
 }
 
 
+/**
+ * \brief La fonction affiche les coordonnées du sprite
+ * \param sprite les données du sprite
+ */
+void print_sprite (sprite_t* sprite){
+    printf("Coordonnées : \n");
+    printf("x : %d\n",sprite->x);
+    printf("y : %d\n", sprite->y);
+    printf("Hauteur : %d\n",sprite->h);
+    printf("Largeur : %d\n",sprite->w);
+}
 
 /**
  * \brief La fonction initialise les données du monde du jeu
@@ -117,8 +141,12 @@ void init_data(world_t * world){
     world->gameover = 0;
     //on place le vaisseau
     init_sprite(&(world->spaceship),SCREEN_WIDTH,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
+    //Test de la position du vaisseau
+    print_sprite(&(world->spaceship));
     //On place la ligne d'arrivée 
     init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
+    //Test de la position de la ligne d'arrivée
+    print_sprite(&(world->finish_line));
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
@@ -215,7 +243,7 @@ void update_data(world_t *world){
  * \param sprite va appliquer la texture associée au sprite sur le renderer à la position indiquée dans le sprite
 */
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
-      apply_texture(texture, renderer, sprite->x - SCREEN_WIDTH/2, sprite->y);
+      apply_texture(texture, renderer, sprite->x - SCREEN_WIDTH/2, sprite->y - SCREEN_HEIGHT/2) ;
 }
 
 
