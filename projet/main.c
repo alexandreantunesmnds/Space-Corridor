@@ -140,7 +140,7 @@ void init_data(world_t * world){
     //on n'est pas à la fin du jeu
     world->gameover = 0;
     //on place le vaisseau
-    init_sprite(&(world->spaceship),SCREEN_WIDTH,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
+    init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
     //Test de la position du vaisseau
     print_sprite(&(world->spaceship));
     //On place la ligne d'arrivée 
