@@ -151,7 +151,7 @@ void init_data(world_t * world){
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
     
-    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
+    init_sprite(&(world->mur),SCREEN_WIDTH,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
 }
 
 
@@ -189,7 +189,16 @@ void update_data(world_t *world){
     world->finish_line.y += world->vy;
 }
 
-
+void meteorite_mur(SDL_Renderer *renderer, textures_t *textures,world_t *world, sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE]){
+for (int y=0; y<7; y++){
+	for(int x=0;x<3;x++){
+		temp[x][y] = world->mur;
+		temp[x][y].x += x*METEORITE_SIZE;
+		temp[x][y].y -= y*METEORITE_SIZE;
+		apply_sprite(renderer, textures->meteorite, &temp[x][y]);
+	}
+}
+}
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
@@ -309,6 +318,9 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     apply_sprite(textures->meteorite, renderer,&(world->mur));
+	
+	sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE];
+	meteorite_mur(renderer, textures, world,temp);
     // on met à jour l'écran
     update_screen(renderer);
 }
