@@ -186,18 +186,8 @@ int is_game_over(world_t *world){
 
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
+    world->mur.y += world->vy;
 }
-/*
-void meteorite_mur(SDL_Renderer *renderer, textures_t *textures,world_t *world, sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE]){
-for (int y=0; y<7; y++){
-	for(int x=0;x<3;x++){
-		temp[x][y] = world->mur;
-		temp[x][y].x += x*METEORITE_SIZE;
-		temp[x][y].y -= y*METEORITE_SIZE;
-		apply_sprite(renderer, textures->meteorite, &temp[x][y]);
-	}
-}
-} */
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
@@ -326,8 +316,6 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
         }
         y += METEORITE_SIZE;
     }
-	//sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE];
-	//meteorite_mur(renderer, textures, world,temp);
     // on met à jour l'écran
     update_screen(renderer);
 }
