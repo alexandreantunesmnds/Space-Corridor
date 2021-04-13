@@ -150,11 +150,7 @@ void init_data(world_t * world){
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
-    int x = 0;
-    while (x < 3){
-    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
-    x++;
-    }
+     init_sprite(&world->mur, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 3, 7);
 }
 
 
@@ -320,23 +316,21 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_background(renderer, textures);
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
-    int x, y = 0;
-    while (x<3){
-    int posX = METEORITE_SIZE*3 + x * 1.20 * METEORITE_SIZE;
-    apply_texture(textures->meteorite, renderer, posX, SCREEN_HEIGHT/2);
-    x++;
-    while (y < 7){
-        int posY = 3 + METEORITE_SIZE*7 + y * 1.20 * METEORITE_SIZE;
-        apply_texture(textures->meteorite, renderer, posX, posY);
-        y++;
-    }
+//application des textures des météorites selon la taille et la largeur du mur de météorites
+    int y = world->mur.y - world->mur.h*METEORITE_SIZE/2;
+    for(int j = 0 ; j < world->mur.h ; j++){
+        int x = world->mur.x - world->mur.w*METEORITE_SIZE/2;
+        for(int i = 0 ; i < world->mur.w ; i++){
+            apply_texture(textures->meteorite, renderer, x, y);
+            x += METEORITE_SIZE;
+        }
+        y += METEORITE_SIZE;
     }
 	//sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE];
 	//meteorite_mur(renderer, textures, world,temp);
     // on met à jour l'écran
     update_screen(renderer);
 }
-
 
 
 /**
