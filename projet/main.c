@@ -257,7 +257,23 @@ void clean_textures(textures_t *textures){
     clean_texture(textures->meteorite);
 }
 
-
+/**
+ * \brief La fonction les textures des météorites
+ * \param renderer le renderer
+ * \param world les données du monde
+ * \param textures les textures du jeu
+ */
+void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+    int y = world->mur.y - world->mur.h*METEORITE_SIZE/2;
+    for(int j = 0 ; j < world->mur.h ; j++){
+        int x = world->mur.x - world->mur.w*METEORITE_SIZE/2;
+        for(int i = 0 ; i < world->mur.w ; i++){
+            apply_texture(textures->meteorite, renderer, x, y);
+            x += METEORITE_SIZE;
+        }
+        y += METEORITE_SIZE;
+    }
+}
 
 /**
  * \brief La fonction initialise les texures
@@ -289,7 +305,6 @@ void apply_background(SDL_Renderer *renderer, textures_t *textures){
 
 
 
-
 /**
  * \brief La fonction rafraichit l'écran en fonction de l'état des données du monde
  * \param renderer le renderer
@@ -306,16 +321,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_background(renderer, textures);
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
-//application des textures des météorites selon la taille et la largeur du mur de météorites
-    int y = world->mur.y - world->mur.h*METEORITE_SIZE/2;
-    for(int j = 0 ; j < world->mur.h ; j++){
-        int x = world->mur.x - world->mur.w*METEORITE_SIZE/2;
-        for(int i = 0 ; i < world->mur.w ; i++){
-            apply_texture(textures->meteorite, renderer, x, y);
-            x += METEORITE_SIZE;
-        }
-        y += METEORITE_SIZE;
-    }
+    //application des textures des météorites selon la taille et la largeur du mur de météorites
+    build_wall(renderer, world,textures);
     // on met à jour l'écran
     update_screen(renderer);
 }
