@@ -150,8 +150,11 @@ void init_data(world_t * world){
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
-    
-    init_sprite(&(world->mur),SCREEN_WIDTH,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
+    int x = 0;
+    while (x < 3){
+    init_sprite(&(world->mur),SCREEN_WIDTH/2,SCREEN_HEIGHT/2,METEORITE_SIZE,METEORITE_SIZE);
+    x++;
+    }
 }
 
 
@@ -188,7 +191,7 @@ int is_game_over(world_t *world){
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
 }
-
+/*
 void meteorite_mur(SDL_Renderer *renderer, textures_t *textures,world_t *world, sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE]){
 for (int y=0; y<7; y++){
 	for(int x=0;x<3;x++){
@@ -198,7 +201,7 @@ for (int y=0; y<7; y++){
 		apply_sprite(renderer, textures->meteorite, &temp[x][y]);
 	}
 }
-}
+} */
 
 /**
  * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
@@ -252,7 +255,7 @@ for (int y=0; y<7; y++){
  * \param sprite va appliquer la texture associée au sprite sur le renderer à la position indiquée dans le sprite
 */
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
-      apply_texture(texture, renderer, sprite->x - SCREEN_WIDTH/2, sprite->y - SCREEN_HEIGHT/2) ;
+      apply_texture(texture, renderer, sprite->x - sprite->w/2, sprite->y - sprite->h/2) ;
 }
 
 
@@ -317,10 +320,19 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_background(renderer, textures);
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
-    apply_sprite(textures->meteorite, renderer,&(world->mur));
-	
-	sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE];
-	meteorite_mur(renderer, textures, world,temp);
+    int x, y = 0;
+    while (x<3){
+    int posX = METEORITE_SIZE*3 + x * 1.20 * METEORITE_SIZE;
+    apply_texture(textures->meteorite, renderer, posX, SCREEN_HEIGHT/2);
+    x++;
+    while (y < 7){
+        int posY = 3 + METEORITE_SIZE*7 + y * 1.20 * METEORITE_SIZE;
+        apply_texture(textures->meteorite, renderer, posX, posY);
+        y++;
+    }
+    }
+	//sprite_t temp[world->mur.w/METEORITE_SIZE][world->mur.h/METEORITE_SIZE];
+	//meteorite_mur(renderer, textures, world,temp);
     // on met à jour l'écran
     update_screen(renderer);
 }
