@@ -150,7 +150,7 @@ void init_data(world_t * world){
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
-     init_sprite(&world->mur, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, 3, 7);
+    init_sprite(&world->mur, SCREEN_WIDTH/2-METEORITE_SIZE/2, SCREEN_HEIGHT/2, 3*METEORITE_SIZE, 7*METEORITE_SIZE);
 }
 
 
@@ -264,10 +264,10 @@ void clean_textures(textures_t *textures){
  * \param textures les textures du jeu
  */
 void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
-    int y = world->mur.y - world->mur.h*METEORITE_SIZE/2;
-    for(int j = 0 ; j < world->mur.h ; j++){
-        int x = world->mur.x - world->mur.w*METEORITE_SIZE/2;
-        for(int i = 0 ; i < world->mur.w ; i++){
+    int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2;
+    for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
+        int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;
+        for(int i = 0 ; i < world->mur.w/METEORITE_SIZE ; i++){
             apply_texture(textures->meteorite, renderer, x, y);
             x += METEORITE_SIZE;
         }
