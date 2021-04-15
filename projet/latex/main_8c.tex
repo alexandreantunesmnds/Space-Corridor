@@ -12,7 +12,7 @@ Programme principal initial du niveau 1.
 struct \mbox{\hyperlink{structtextures__s}{textures\+\_\+s}}
 \item 
 struct \mbox{\hyperlink{structsprite__s}{sprite\+\_\+s}}
-\item 
+\begin{DoxyCompactList}\small\item\em Représentation des sprite. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structworld__s}{world\+\_\+s}}
 \begin{DoxyCompactList}\small\item\em Représentation du monde du jeu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Macros}
@@ -45,17 +45,18 @@ struct \mbox{\hyperlink{structworld__s}{world\+\_\+s}}
 typedef struct \mbox{\hyperlink{structtextures__s}{textures\+\_\+s}} \mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Type qui correspond aux textures du jeu. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{main_8c_a5371414b10358aeda7c6bcec8196342f}\label{main_8c_a5371414b10358aeda7c6bcec8196342f}} 
-typedef struct \mbox{\hyperlink{structsprite__s}{sprite\+\_\+s}} {\bfseries sprite\+\_\+t}
-\item 
+typedef struct \mbox{\hyperlink{structsprite__s}{sprite\+\_\+s}} \mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type qui correspond aux sprites. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{main_8c_ad55869c5e54f717062ec699d20fa8886}\label{main_8c_ad55869c5e54f717062ec699d20fa8886}} 
 typedef struct \mbox{\hyperlink{structworld__s}{world\+\_\+s}} \mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}}
 \begin{DoxyCompactList}\small\item\em Type qui correspond aux données du monde. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{main_8c_a7edf5248c9929108f571836fb92f204a}\label{main_8c_a7edf5248c9929108f571836fb92f204a}} 
-void {\bfseries init\+\_\+sprite} (\mbox{\hyperlink{structsprite__s}{sprite\+\_\+t}} $\ast$sprite, int x, int y, int w, int h)
-\item 
+void \mbox{\hyperlink{main_8c_a7edf5248c9929108f571836fb92f204a}{init\+\_\+sprite}} (\mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$sprite, int x, int y, int w, int h)
+\begin{DoxyCompactList}\small\item\em La fonction initialise les sprites. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a242b29f702d42f06f3cdf3843ee7f930}{print\+\_\+sprite}} (\mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$sprite)
+\begin{DoxyCompactList}\small\item\em La fonction affiche les coordonnées du sprite. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a5676e72ded3c1a993c4c975ef9958288}{init\+\_\+data}} (\mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}} $\ast$world)
 \begin{DoxyCompactList}\small\item\em La fonction initialise les données du monde du jeu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_abcbee1dbb5697f9d0de3f737f9c7aafe}{clean\+\_\+data}} (\mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}} $\ast$world)
@@ -66,10 +67,12 @@ void \mbox{\hyperlink{main_8c_a6c91f82a5ece8b14628159353390adf4}{update\+\_\+dat
 \begin{DoxyCompactList}\small\item\em La fonction met à jour les données en tenant compte de la physique du monde. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a947b9f8960b2202788f43c71fbaa9d67}{handle\+\_\+events}} (SDL\+\_\+\+Event $\ast$event, \mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}} $\ast$world)
 \begin{DoxyCompactList}\small\item\em La fonction gère les évènements ayant eu lieu et qui n\textquotesingle{}ont pas encore été traités. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{main_8c_a66cc0d30cf99cda10fda2ce371e3732c}{apply\+\_\+sprite}} (SDL\+\_\+\+Texture $\ast$texture, SDL\+\_\+\+Renderer $\ast$renderer, \mbox{\hyperlink{structsprite__s}{sprite\+\_\+t}} $\ast$sprite)
+void \mbox{\hyperlink{main_8c_a66cc0d30cf99cda10fda2ce371e3732c}{apply\+\_\+sprite}} (SDL\+\_\+\+Texture $\ast$texture, SDL\+\_\+\+Renderer $\ast$renderer, \mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$sprite)
 \begin{DoxyCompactList}\small\item\em La fonction permet d\textquotesingle{}appliquer le sprite sur le renderer à une position donnée. La hauteur et la largeur est la même que celle de la texture. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a47508a80056a626ded3e02f0690fa432}{clean\+\_\+textures}} (\mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}} $\ast$textures)
 \begin{DoxyCompactList}\small\item\em La fonction nettoie les textures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a781428ce47e5ee69f400934ad41b5d7e}{build\+\_\+wall}} (SDL\+\_\+\+Renderer $\ast$renderer, \mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}} $\ast$world, \mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}} $\ast$textures)
+\begin{DoxyCompactList}\small\item\em La fonction les textures des météorites. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a03798323fe88fdd815fa2cb29b79f972}{init\+\_\+textures}} (SDL\+\_\+\+Renderer $\ast$renderer, \mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}} $\ast$textures)
 \begin{DoxyCompactList}\small\item\em La fonction initialise les texures. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a223d62b49979b960bbaa2b3fdc666e48}{apply\+\_\+background}} (SDL\+\_\+\+Renderer $\ast$renderer, \mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}} $\ast$textures)
@@ -134,7 +137,7 @@ La fonction applique la texture du fond sur le renderer lié à l\textquotesingl
 \index{main.c@{main.c}!apply\_sprite@{apply\_sprite}}
 \index{apply\_sprite@{apply\_sprite}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{apply\_sprite()}{apply\_sprite()}}
-{\footnotesize\ttfamily void apply\+\_\+sprite (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Texture $\ast$}]{texture,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\mbox{\hyperlink{structsprite__s}{sprite\+\_\+t}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void apply\+\_\+sprite (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Texture $\ast$}]{texture,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$}]{sprite }\end{DoxyParamCaption})}
 
 
 
@@ -147,6 +150,25 @@ La fonction permet d\textquotesingle{}appliquer le sprite sur le renderer à une
 {\em renderer} & le renderer qui va recevoir la texture \\
 \hline
 {\em sprite} & va appliquer la texture associée au sprite sur le renderer à la position indiquée dans le sprite \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a781428ce47e5ee69f400934ad41b5d7e}\label{main_8c_a781428ce47e5ee69f400934ad41b5d7e}} 
+\index{main.c@{main.c}!build\_wall@{build\_wall}}
+\index{build\_wall@{build\_wall}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{build\_wall()}{build\_wall()}}
+{\footnotesize\ttfamily void build\+\_\+wall (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer,  }\item[{\mbox{\hyperlink{main_8c_ad55869c5e54f717062ec699d20fa8886}{world\+\_\+t}} $\ast$}]{world,  }\item[{\mbox{\hyperlink{main_8c_ae642a1d3f0220525d958c1723e5a6c6c}{textures\+\_\+t}} $\ast$}]{textures }\end{DoxyParamCaption})}
+
+
+
+La fonction les textures des météorites. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & le renderer \\
+\hline
+{\em world} & les données du monde \\
+\hline
+{\em textures} & les textures du jeu \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{main_8c_a7f417770b38ecfb6688b0726fd34dd92}\label{main_8c_a7f417770b38ecfb6688b0726fd34dd92}} 
@@ -253,6 +275,29 @@ La fonction initialise les données du monde du jeu.
 {\em world} & les données du monde \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{main_8c_a7edf5248c9929108f571836fb92f204a}\label{main_8c_a7edf5248c9929108f571836fb92f204a}} 
+\index{main.c@{main.c}!init\_sprite@{init\_sprite}}
+\index{init\_sprite@{init\_sprite}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{init\_sprite()}{init\_sprite()}}
+{\footnotesize\ttfamily void init\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$}]{sprite,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+
+
+La fonction initialise les sprites. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & les données du sprite \\
+\hline
+{\em x} & coordonnées en abscisse \\
+\hline
+{\em y} & coordonnées en ordonnée \\
+\hline
+{\em w} & taille du sprite en largeur \\
+\hline
+{\em h} & taille du sprite en hauteur \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{main_8c_a03798323fe88fdd815fa2cb29b79f972}\label{main_8c_a03798323fe88fdd815fa2cb29b79f972}} 
 \index{main.c@{main.c}!init\_textures@{init\_textures}}
 \index{init\_textures@{init\_textures}!main.c@{main.c}}
@@ -288,6 +333,21 @@ La fonction indique si le jeu est fini en fonction des données du monde.
 \begin{DoxyReturn}{Returns}
 1 si le jeu est fini, 0 sinon 
 \end{DoxyReturn}
+\mbox{\Hypertarget{main_8c_a242b29f702d42f06f3cdf3843ee7f930}\label{main_8c_a242b29f702d42f06f3cdf3843ee7f930}} 
+\index{main.c@{main.c}!print\_sprite@{print\_sprite}}
+\index{print\_sprite@{print\_sprite}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{print\_sprite()}{print\_sprite()}}
+{\footnotesize\ttfamily void print\+\_\+sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a5371414b10358aeda7c6bcec8196342f}{sprite\+\_\+t}} $\ast$}]{sprite }\end{DoxyParamCaption})}
+
+
+
+La fonction affiche les coordonnées du sprite. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sprite} & les données du sprite \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{main_8c_ad463e9558ab20ad44fa6299593f251bc}\label{main_8c_ad463e9558ab20ad44fa6299593f251bc}} 
 \index{main.c@{main.c}!refresh\_graphics@{refresh\_graphics}}
 \index{refresh\_graphics@{refresh\_graphics}!main.c@{main.c}}
