@@ -6,7 +6,7 @@
  */
 #include "sdl2-light.h"
 #include "constantes.h"
-
+#include "world.h"
 
 /**
  * \brief La fonction initialise les sprites

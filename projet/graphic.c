@@ -6,6 +6,8 @@
  */
 #include "sdl2-light.h"
 #include "constantes.h"
+#include "world.h"
+#include "graphic.h"
 
 /**
  * \brief La fonction permet d'appliquer le sprite sur le renderer à une position donnée. La hauteur et la largeur est la même que celle de la texture.

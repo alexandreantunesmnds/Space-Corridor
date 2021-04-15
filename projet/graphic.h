@@ -4,8 +4,12 @@
  * \author Alexandre Antunes && Corentin DROMER
  * \date 14 Avril 2021
  */
-#include "sdl2-light.h"
+ #ifndef GRAPHIC_H
+ #define GRAPHIC_H
 
+
+#include "sdl2-light.h"
+#include "world.h"
 /**
  * \brief Structure des textures du monde
 */
@@ -89,3 +93,4 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, textures_t *textures, wo
  */
 
 void init(SDL_Window **window, SDL_Renderer ** renderer, textures_t *textures, world_t * world);
+#endif

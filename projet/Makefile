@@ -21,6 +21,6 @@ clean:
 	rm -f *~ *.o $(PROG)
 	rm -rf latex html
 
-tests:
-gcc $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
+tests: $(OBJ)
+	gcc $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
 

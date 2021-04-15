@@ -4,8 +4,9 @@
  * \author Alexandre ANTUNES && Corentin DROMER
  * \date 14 Avril 2021
  */
-
-
+#ifndef WORLD_H
+#define WORLD_H
+#include "sdl2-light.h"
 /**
  * \brief Représentation des sprite
 */
@@ -93,3 +94,5 @@ void update_data(world_t *world);
  */
 
    void handle_events(SDL_Event *event,world_t *world);
+
+   #endif

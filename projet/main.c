@@ -7,6 +7,7 @@
  */
 #include "sdl2-light.h"
 #include "graphic.h"
+#include "world.h"
 #include "constantes.h"
 
 
