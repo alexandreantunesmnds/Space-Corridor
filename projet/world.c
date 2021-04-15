@@ -96,6 +96,13 @@ void update_data(world_t *world){
  * \param world les données du monde
  */
 
+
+void limit_screen(world_t *world){
+	
+	
+}
+
+
    void handle_events(SDL_Event *event,world_t *world){
     Uint8 *keystates;
     while( SDL_PollEvent( event ) ) {
@@ -111,7 +118,7 @@ void update_data(world_t *world){
             //si la touche appuyée est 'Echap'
              if(event->key.keysym.sym == SDLK_ESCAPE){
                  printf("La touche Echap est appuyée\n");
-                 exit(0);
+                 world->gameover = 1;
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
