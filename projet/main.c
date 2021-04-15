@@ -6,6 +6,7 @@
  * \date 18 mars 2021
  */
 #include "sdl2-light.h"
+<<<<<<< HEAD
 #include "constante.h" //Inclus le fichier d'en tête constante qui gère les constantes
 #include "graphique.h" //Inclus le fichier d'en tête graphique qui gère l'affichage graphique et la gestion des textures
 #include "monde.h"  //Inclus le fichier d'en tête monde qui gère les définitions et données du monde
@@ -51,6 +52,13 @@
     }
     }
 
+=======
+#include "graphic.h"
+#include "world.h"
+#include "constantes.h"
+
+
+>>>>>>> e1ce42115a0ab2b2593ae3469e50844a6134c929
 /**
  *  \brief programme principal qui implémente la boucle du jeu
  */
