@@ -31,11 +31,11 @@ void init_data(world_t * world){
     //on place le vaisseau
     init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
     //Test de la position du vaisseau
-    print_sprite(&(world->spaceship));
+    //print_sprite(&(world->spaceship));
     //On place la ligne d'arrivée 
     init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
     //Test de la position de la ligne d'arrivée
-    print_sprite(&(world->finish_line));
+    //print_sprite(&(world->finish_line));
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites

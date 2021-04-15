@@ -28,7 +28,6 @@ void handle_events(SDL_Event *event,world_t *world){
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
-                 world->spaceship.y -= MOVING_STEP;
                  world->vy += 1;
               }
               //si la touche appuyée est 'flèche gauche'
@@ -37,7 +36,6 @@ void handle_events(SDL_Event *event,world_t *world){
               }
               //si la touche appuyée est 'flèche bas'
              if(event->key.keysym.sym == SDLK_DOWN){
-                 world->spaceship.y += MOVING_STEP;
                  world->vy -= 1;
               }
              //si la touche appuyée est 'flèche droite'
