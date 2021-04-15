@@ -8,14 +8,6 @@
 #include "constantes.h"
 #include "world.h"
 
-/**
- * \brief La fonction initialise les sprites
- * \param sprite les données du sprite
- * \param x coordonnées en abscisse
- * \param y coordonnées en ordonnée
- * \param w taille du sprite en largeur
- * \param h taille du sprite en hauteur
- */
 void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
     sprite->w = w;
     sprite->h = h;
@@ -23,10 +15,7 @@ void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
     sprite->y = y;
 }
 
-/**
- * \brief La fonction affiche les coordonnées du sprite
- * \param sprite les données du sprite
- */
+
 void print_sprite (sprite_t* sprite){
     printf("Coordonnées : \n");
     printf("x : %d\n",sprite->x);
@@ -34,12 +23,6 @@ void print_sprite (sprite_t* sprite){
     printf("Hauteur : %d\n",sprite->h);
     printf("Largeur : %d\n",sprite->w);
 }
-
-/**
- * \brief La fonction initialise les données du monde du jeu
- * \param world les données du monde
- */
-
 
 void init_data(world_t * world){
     
@@ -59,42 +42,22 @@ void init_data(world_t * world){
     init_sprite(&world->mur, SCREEN_WIDTH/2-METEORITE_SIZE/2, SCREEN_HEIGHT/2, 3*METEORITE_SIZE, 7*METEORITE_SIZE);
 }
 
-/**
- * \brief La fonction nettoie les données du monde
- * \param world les données du monde
- */
-
 
 void clean_data(world_t *world){
     /* utile uniquement si vous avez fait de l'allocation dynamique (malloc); la fonction ici doit permettre de libérer la mémoire (free) */
     
 }
 
-/**
- * \brief La fonction indique si le jeu est fini en fonction des données du monde
- * \param world les données du monde
- * \return 1 si le jeu est fini, 0 sinon
- */
-
 int is_game_over(world_t *world){
     return world->gameover;
 }
 
-/**
- * \brief La fonction met à jour les données en tenant compte de la physique du monde
- * \param les données du monde
- */
 
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
     world->mur.y += world->vy;
 }
 
-/**
- * \brief La fonction gère les évènements ayant eu lieu et qui n'ont pas encore été traités
- * \param event paramètre qui contient les événements
- * \param world les données du monde
- */
 
    void handle_events(SDL_Event *event,world_t *world){
     Uint8 *keystates;
