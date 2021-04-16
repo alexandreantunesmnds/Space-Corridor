@@ -10,7 +10,9 @@
 #include "graphic.h"
 
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
+    if (sprite->visible == 0){
       apply_texture(texture, renderer, sprite->x - sprite->w/2, sprite->y - sprite->h/2) ;
+    }
 }
 
 void clean_textures(textures_t *textures){
@@ -58,9 +60,7 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     //application des textures dans le renderer
     apply_background(renderer, textures);
     //on teste s'il y'a collision ou non pour que le vaisseau soit affiché
-    if (world->make_dissapear == 0){
-        apply_sprite(textures->spaceship, renderer, &(world->spaceship));
-    }
+    apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     //application des textures des météorites selon la taille et la largeur du mur de météorites
     build_wall(renderer, world,textures);

@@ -23,6 +23,12 @@
  */
  int sprites_collide(sprite_t *sp1, sprite_t *sp2);
 
- void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world);
+/**
+ * \brief La fonction renvoie 1 si il y a collision 0 sinon
+ * \param sp1 sprite 1
+ * \param sp2 sprite 2 
+ * \param world les données du monde
+ */
+ void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear);
 
  #endif

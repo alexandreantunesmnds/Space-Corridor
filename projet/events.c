@@ -56,9 +56,16 @@ void handle_events(SDL_Event *event,world_t *world){
         }
     }
 
-    void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world){
+    void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){
         if (sprites_collide(sp1,sp2)){
             world->vy = 0;
-            world->make_dissapear = 1;
+            sp2->visible = 0;
+            if (make_disappear == 1){
+                sp1->visible = 1;
+            }
+        }
+        else{
+            sp2->visible = 0;
+            make_disappear = 0;
         }
     }

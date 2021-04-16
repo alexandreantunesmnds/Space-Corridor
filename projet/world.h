@@ -11,10 +11,11 @@
  * \brief Représentation des sprite
 */
  struct sprite_s{
-	 int x; /*!< Coordonnées x du vaisseau */
-	 int y; /*!< Coordonnées y du vaisseau */
-	 int h; /*!< Hauteur h du vaisseau */
-	 int w; /*!< Largeur w du vaisseau */
+	 int x; /*!< Coordonnées x du sprite */
+	 int y; /*!< Coordonnées y du sprite */
+	 int h; /*!< Hauteur h du sprite */
+	 int w; /*!< Largeur w du sprite */
+	 int visible; /*! Champ indiquant la visibilité du sprite */
 };
 /**
  * \brief Type qui correspond aux sprites
@@ -32,7 +33,6 @@ struct world_s{
 	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
     sprite_t mur; /*!< Champ indiquant le mur de météorites */
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
-	int make_dissapear; /*! Champ indiquant la visibilité du sprite */
 };
 
 /**
