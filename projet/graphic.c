@@ -57,7 +57,10 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     
     //application des textures dans le renderer
     apply_background(renderer, textures);
-    apply_sprite(textures->spaceship, renderer, &(world->spaceship));
+    //on teste s'il y'a collision ou non pour que le vaisseau soit affiché
+    if (world->make_dissapear == 0){
+        apply_sprite(textures->spaceship, renderer, &(world->spaceship));
+    }
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     //application des textures des météorites selon la taille et la largeur du mur de météorites
     build_wall(renderer, world,textures);

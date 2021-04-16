@@ -4,7 +4,7 @@ LDFLAGS = `sdl2-config --libs` -lSDL2_ttf -lm
 INC = sdl2-light.h world.h graphic.h events.h
 SRC = main.c sdl2-light.c world.c graphic.c events.c
 OBJ = $(SRC:%.c=%.o)
-TESTS = world.c tests.c
+TESTS = tests.c world.c events.c
 TESTS_OBJ = $(TESTS:%.c=%.o)
 PROG = spacecorridor
 

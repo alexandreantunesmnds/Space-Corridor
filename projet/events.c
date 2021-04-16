@@ -24,7 +24,7 @@ void handle_events(SDL_Event *event,world_t *world){
             //si la touche appuyée est 'Echap'
              if(event->key.keysym.sym == SDLK_ESCAPE){
                  printf("La touche Echap est appuyée\n");
-                 exit(0);
+                 world->gameover = 1;
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
@@ -44,4 +44,21 @@ void handle_events(SDL_Event *event,world_t *world){
              }
          }
     }
+    }
+
+
+    int sprites_collide(sprite_t *sp1, sprite_t *sp2){
+        if (((abs(sp1->x - sp2->x)) <= (sp1->w + sp2->w)/2) && ((abs(sp1->y - sp2->y)) <= (sp1->h + sp2->h)/2)){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world){
+        if (sprites_collide(sp1,sp2)){
+            world->vy = 0;
+            world->make_dissapear = 1;
+        }
     }

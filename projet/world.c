@@ -7,6 +7,7 @@
 #include "sdl2-light.h"
 #include "constantes.h"
 #include "world.h"
+#include "events.h"
 
 void init_sprite(sprite_t *sprite, int x, int y, int w, int h){
     sprite->w = w;
@@ -28,6 +29,8 @@ void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
     world->gameover = 0;
+    //on affiche le vaisseau
+    world->make_dissapear = 0;
     //on place le vaisseau
     init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
     //Test de la position du vaisseau
@@ -56,6 +59,9 @@ int is_game_over(world_t *world){
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
     world->mur.y += world->vy;
+    //gestion de la collision
+    handle_sprites_collision(&world->spaceship, &world->mur,world);
+    handle_sprites_collision(&world->spaceship, &world->finish_line,world);
 }
 
 
