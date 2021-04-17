@@ -7,6 +7,18 @@
 
 #include "world.h"
 #include "events.h"
+#include "constantes.h"
+
+
+void test_left_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){
+		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
+	}
+	
+void right_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){
+		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
+	}
 
  void test_init_sprite_param(sprite_t *sprite, int x, int y, int w, int h){
      init_sprite(sprite,x,y,w,h);
@@ -49,7 +61,6 @@ void test_handle_sprites_collision(){
     world_t world;
     test_init_sprite_param(&cobaye,10,12,45,45);
     test_init_sprite_param(&crashtest,10,12,21,21);
-
     handle_sprites_collision_param(&cobaye,&crashtest,&world);
 }
 
@@ -58,5 +69,6 @@ int main(int argc, char * argv[]){
     test_init_sprite();
     test_sprites_collide();
     test_handle_sprites_collision();
+	test_left_limit_screen(world_t *world);
     return 0;
 }

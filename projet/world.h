@@ -88,5 +88,19 @@ int is_game_over(world_t *world);
 
 void update_data(world_t *world);
 
+/**
+ * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la droite du monde
+ * \param les données du monde
+ */
+ 
+void left_limit_screen(world_t *world);
+
+/**
+ * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la droite du monde
+ * \param les données du monde
+ */
+
+void right_limit_screen(world_t *world);
+
 
    #endif

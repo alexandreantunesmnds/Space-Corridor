@@ -9,6 +9,7 @@
 #include "graphic.h"
 #include "world.h"
 #include "constantes.h"
+#include "control.h"
 
 
 /**
