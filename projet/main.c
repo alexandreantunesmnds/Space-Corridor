@@ -9,7 +9,11 @@
 #include "graphic.h"
 #include "world.h"
 #include "constantes.h"
+<<<<<<< HEAD
 #include "events.h"
+=======
+#include "control.h"
+>>>>>>> cc4eb4e05f2fa5b0806e71495e3bd036bf7eb8f2
 
 
 /**

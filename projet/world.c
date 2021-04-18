@@ -65,11 +65,21 @@ void update_data(world_t *world){
     //gestion de la collision
     handle_sprites_collision(&world->spaceship, &world->mur,world,1);
     handle_sprites_collision(&world->spaceship, &world->finish_line,world, 0);
+	left_limit_screen();
+	right_limit_screen();
 }
 
 
-/*
-void limit_screen(world_t *world){
+
+void left_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){
+		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
+	}
 	
-	
-} */
+}
+
+void right_limit_screen(world_t *world){
+	if (world->spaceship.x+world->spaceship.w/2 > SCREEN_WIDTH){
+		world->spaceship.x = world->spaceship.x - SHIP_SIZE;
+	}
+}
