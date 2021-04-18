@@ -6,6 +6,7 @@
  */
 #ifndef WORLD_H
 #define WORLD_H
+#include "constantes.h"
 #include "sdl2-light.h"
 /**
  * \brief Représentation des sprite
@@ -33,6 +34,7 @@ struct world_s{
 	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
     sprite_t mur; /*!< Champ indiquant le mur de météorites */
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
+	sprite_t table_murs[N]; /*!< Champ correspondant au tableau de météorites*/
 };
 
 /**
@@ -83,10 +85,15 @@ int is_game_over(world_t *world);
 
 /**
  * \brief La fonction met à jour les données en tenant compte de la physique du monde
- * \param les données du monde
+ * \param world les données du monde
  */
 
 void update_data(world_t *world);
 
+/**
+ * \brief La fonction donne la position des murs pour former un couloir
+ * \param world les données du monde
+ */
+void init_walls (world_t *world);
 
-   #endif
+#endif
