@@ -25,11 +25,6 @@ void print_sprite (sprite_t* sprite){
     printf("Largeur : %d\n",sprite->w);
 }
 
-void init_walls (world_t *world){
-    
-
-}
-
 void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
