@@ -53,19 +53,6 @@ int is_game_over(world_t *world){
     return world->gameover;
 }
 
-
-void update_data(world_t *world){
-    world->finish_line.y += world->vy;
-    world->mur.y += world->vy;
-    //gestion de la collision
-    handle_sprites_collision(&world->spaceship, &world->mur,world,1);
-    handle_sprites_collision(&world->spaceship, &world->finish_line,world, 0);
-	left_limit_screen();
-	right_limit_screen();
-}
-
-
-
 void left_limit_screen(world_t *world){
 	if (world->spaceship.x-world->spaceship.w/2 < 0){
 		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
@@ -78,3 +65,17 @@ void right_limit_screen(world_t *world){
 		world->spaceship.x = world->spaceship.x - SHIP_SIZE;
 	}
 }
+
+
+void update_data(world_t *world){
+    world->finish_line.y += world->vy;
+    world->mur.y += world->vy;
+    //gestion de la collision
+    handle_sprites_collision(&world->spaceship, &world->mur,world,1);
+    handle_sprites_collision(&world->spaceship, &world->finish_line,world, 0);
+	left_limit_screen(world_t *world); // à modifier
+	right_limit_screen(world_t *world); //à modifier
+}
+
+
+
