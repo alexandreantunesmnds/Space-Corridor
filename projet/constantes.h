@@ -51,3 +51,8 @@
 */
 
 #define INITIAL_SPEED 2
+
+/**
+  * \brief Taille du tableau de murs dans la structure world
+*/
+#define N 6

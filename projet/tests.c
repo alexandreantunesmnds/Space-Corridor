@@ -56,7 +56,7 @@ void test_sprites_collide(){
     test_sprites_collide_param(&cobaye,&crashtest);
 }
 
-void handle_sprites_collision_param(sprite_t *sp1, sprite_t *sp2, world_t *world){
+void handle_sprites_collision_param(sprite_t *sp1, sprite_t *sp2, world_t *world){ //revoir les paramètres (avec make_disappear)
     handle_sprites_collision(sp1,sp2,world);
     printf("La vitesse du monde vaut après collision : %d",world->vy);
     
