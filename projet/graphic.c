@@ -24,9 +24,9 @@ void clean_textures(textures_t *textures){
 
 
 void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
-    int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2;
+    int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
     for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
-        int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;
+        int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;//puis en abscisses
         for(int i = 0 ; i < world->mur.w/METEORITE_SIZE ; i++){
             apply_texture(textures->meteorite, renderer, x, y);
             x += METEORITE_SIZE;
@@ -59,7 +59,6 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     
     //application des textures dans le renderer
     apply_background(renderer, textures);
-    //on teste s'il y'a collision ou non pour que le vaisseau soit affiché
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     //application des textures des météorites selon la taille et la largeur du mur de météorites
