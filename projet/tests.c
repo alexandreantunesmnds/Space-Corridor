@@ -9,7 +9,6 @@
 #include "events.h"
 #include "constantes.h"
 
-
 void test_left_limit_screen(world_t *world){
 	if (world->spaceship.x-world->spaceship.w/2 < 0){
 		world->spaceship.x = world->spaceship.x + SHIP_SIZE; //fonction à vérifier car pas sûr
@@ -55,10 +54,27 @@ void test_sprites_collide(){
     test_init_sprite_param(&crashtest,10,12,21,21);
     test_sprites_collide_param(&cobaye,&crashtest);
 }
+/*
+void test_left_limit_screen_param(world_t *world){
+    
+}
 
-void handle_sprites_collision_param(sprite_t *sp1, sprite_t *sp2, world_t *world){ //revoir les paramètres (avec make_disappear)
-    handle_sprites_collision(sp1,sp2,world);
+void test_left_limit_screen_param(){
+
+}
+void test_right_limit_screen_param(){
+
+}
+void test_right_limit_screen_param(world_t *world){
+
+}
+*/
+void handle_sprites_collision_param(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){ //revoir les paramètres (avec make_disappear)
+    handle_sprites_collision(sp1,sp2,world,make_disappear);
     printf("La vitesse du monde vaut après collision : %d",world->vy);
+    if (sp1->visible==1){
+        printf("Le sprite a disparu suite a la collision avec l'autre");
+    }
     
 }
 
@@ -68,12 +84,14 @@ void test_handle_sprites_collision(){
     world_t world;
     test_init_sprite_param(&cobaye,10,12,45,45);
     test_init_sprite_param(&crashtest,10,12,21,21);
-    handle_sprites_collision_param(&cobaye,&crashtest,&world);
+    handle_sprites_collision_param(&cobaye,&crashtest,&world, 1);
 }
 
 
 int main(int argc, char * argv[]){
     test_init_sprite();
+    //test_left_limit_screen();
+    //test_right_limit_screen();
     test_sprites_collide();
     test_handle_sprites_collision();
 	test_left_limit_screen(world_t *world);

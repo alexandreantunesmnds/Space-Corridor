@@ -91,25 +91,9 @@ int is_game_over(world_t *world);
 void update_data(world_t *world);
 
 /**
-<<<<<<< HEAD
  * \brief La fonction donne la position des murs pour former un couloir
  * \param world les données du monde
  */
 void init_walls (world_t *world);
-=======
- * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la droite du monde
- * \param les données du monde
- */
- 
-void left_limit_screen(world_t *world);
-
-/**
- * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la droite du monde
- * \param les données du monde
- */
-
-void right_limit_screen(world_t *world);
-
->>>>>>> cc4eb4e05f2fa5b0806e71495e3bd036bf7eb8f2
 
 #endif

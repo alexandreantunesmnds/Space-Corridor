@@ -31,16 +31,19 @@ void init_data(world_t * world){
     world->gameover = 0;
     //on place le vaisseau
     init_sprite(&(world->spaceship),SCREEN_WIDTH/2,SCREEN_HEIGHT-SHIP_SIZE,SHIP_SIZE,SHIP_SIZE);
+    world->spaceship.visible = 0;
     //Test de la position du vaisseau
     //print_sprite(&(world->spaceship));
     //On place la ligne d'arrivée 
     init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
+    world->finish_line.visible = 0;
     //Test de la position de la ligne d'arrivée
     //print_sprite(&(world->finish_line));
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
     init_sprite(&world->mur, SCREEN_WIDTH/2-METEORITE_SIZE/2, SCREEN_HEIGHT/2, 3*METEORITE_SIZE, 7*METEORITE_SIZE);
+    world->mur.visible = 0;
 }
 
 
@@ -66,16 +69,12 @@ void right_limit_screen(world_t *world){
 	}
 }
 
-
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
     world->mur.y += world->vy;
     //gestion de la collision
     handle_sprites_collision(&world->spaceship, &world->mur,world,1);
-    handle_sprites_collision(&world->spaceship, &world->finish_line,world, 0);
-	left_limit_screen(world_t *world); // à modifier
-	right_limit_screen(world_t *world); //à modifier
+    handle_sprites_collision(&world->spaceship, &world->finish_line,world,0);
+	left_limit_screen(world);
+	right_limit_screen(world);
 }
-
-
-

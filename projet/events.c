@@ -46,10 +46,22 @@ void handle_events(SDL_Event *event,world_t *world){
     }
     }
 
+void left_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){ // si on a atteint la limite à droite alors le vaisseau est replacé
+		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
+	}
+	
+}
+
+void right_limit_screen(world_t *world){
+	if (world->spaceship.x+world->spaceship.w/2 > SCREEN_WIDTH){ // si la limite à gauche est atteinte
+		world->spaceship.x = world->spaceship.x - SHIP_SIZE;
+	}
+}
 
     int sprites_collide(sprite_t *sp1, sprite_t *sp2){
-        if (((abs(sp1->x - sp2->x)) <= (sp1->w + sp2->w)/2) && ((abs(sp1->y - sp2->y)) <= (sp1->h + sp2->h)/2)){
-            return 1;
+        if (((abs(sp1->x - sp2->x)) <= (sp1->w + sp2->w)/2) && ((abs(sp1->y - sp2->y)) <= (sp1->h + sp2->h)/2)){ // si il y a collision entre les deux sprites
+            return 1; 
         }
         else{
             return 0;
@@ -59,13 +71,10 @@ void handle_events(SDL_Event *event,world_t *world){
     void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){
         if (sprites_collide(sp1,sp2)){
             world->vy = 0;
-            sp2->visible = 0;
             if (make_disappear == 1){
-                sp1->visible = 1;
+                sp1->visible = 1; //on fait disparaitre le premier sprite
             }
         }
-        else{
-            sp2->visible = 0;
-            make_disappear = 0;
-        }
-    }
+    } 
+
+    

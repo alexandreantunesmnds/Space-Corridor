@@ -17,6 +17,20 @@
  void handle_events(SDL_Event *event,world_t *world);
 
 /**
+ * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la gauche du monde
+ * \param world données du monde
+ */
+ 
+void left_limit_screen(world_t *world);
+
+/**
+ * \brief La fonction met à jour les données en tenant compte de la position du vaisseau dans le monde pour pas qu'il dépasse la droite du monde
+ * \param world données du monde
+ */
+
+void right_limit_screen(world_t *world);
+
+/**
  * \brief La fonction renvoie 1 si il y a collision 0 sinon
  * \param sp1 sprite 1
  * \param sp2 sprite 2 
