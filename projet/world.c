@@ -55,20 +55,10 @@ void clean_data(world_t *world){
 int is_game_over(world_t *world){
     return world->gameover;
 }
-
-void left_limit_screen(world_t *world){
-	if (world->spaceship.x-world->spaceship.w/2 < 0){
-		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
-	}
+void init_walls (world_t *world){
 	
-}
 
-void right_limit_screen(world_t *world){
-	if (world->spaceship.x+world->spaceship.w/2 > SCREEN_WIDTH){
-		world->spaceship.x = world->spaceship.x - SHIP_SIZE;
-	}
 }
-
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
     world->mur.y += world->vy;
