@@ -9,6 +9,25 @@
 #include "events.h"
 #include "constantes.h"
 
+void test_left_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){
+		world->spaceship.x = world->spaceship.x + SHIP_SIZE;
+        print_sprite(sprite); 		//fonction à vérifier car pas sûr
+		printf("Le sprite touche la bordure gauche");
+	}
+	else {
+		printf("Le sprite ne touche pas la bordure gauche");
+	}
+	
+void test_right_limit_screen(world_t *world){
+	if (world->spaceship.x-world->spaceship.w/2 < 0){  //fonction à vérifier car pas sûr
+	    print_sprite(sprite);
+		printf("Le sprite touche la bordure droite");
+    }
+	else {
+		printf("Le sprite ne touche pas la bordure droite");
+	}
+
  void test_init_sprite_param(sprite_t *sprite, int x, int y, int w, int h){
      init_sprite(sprite,x,y,w,h);
      print_sprite(sprite);
@@ -82,5 +101,6 @@ int main(int argc, char * argv[]){
     test_sprites_collide();
     test_handle_sprites_collision();
 	test_left_limit_screen(world_t *world);
+	test_right_limit_screen(world_t *world);
     return 0;
 }

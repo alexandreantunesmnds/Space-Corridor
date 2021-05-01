@@ -45,4 +45,5 @@ void right_limit_screen(world_t *world);
  */
  void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear);
 
+
  #endif

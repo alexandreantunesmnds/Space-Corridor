@@ -25,6 +25,7 @@ void print_sprite (sprite_t* sprite){
     printf("Largeur : %d\n",sprite->w);
 }
 
+<<<<<<< HEAD
 void init_walls (world_t *world){
     init_sprite(&world->table_murs[0],48,0,96,192);
     init_sprite(&world->table_murs[1],252,0,96,192);
@@ -34,6 +35,8 @@ void init_walls (world_t *world){
     init_sprite(&world->table_murs[5],252,-672,96,192);
 }
 
+=======
+>>>>>>> ba063f255cf58c36b127d87997250788d6cd1798
 void init_data(world_t * world){
     
     //on n'est pas à la fin du jeu
@@ -66,8 +69,10 @@ void clean_data(world_t *world){
 int is_game_over(world_t *world){
     return world->gameover;
 }
+void init_walls (world_t *world){
+	
 
-
+}
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
     for (int i = 0;i < N;i++){
