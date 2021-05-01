@@ -17,7 +17,6 @@ void handle_events(SDL_Event *event,world_t *world){
         if (event->type == SDL_QUIT) {
             //On indique la fin du jeu
             world->gameover = 1;
-			printf("YOU LOST !");
         }
 
          //si une touche est appuyée
@@ -26,7 +25,6 @@ void handle_events(SDL_Event *event,world_t *world){
              if(event->key.keysym.sym == SDLK_ESCAPE){
                  printf("La touche Echap est appuyée\n");
                  world->gameover = 1;
-				 printf("YOU LOST !");
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
@@ -88,4 +86,3 @@ unsigned int timer = 0,currentTime;
 		timer = 0;
 	}
 }
-  

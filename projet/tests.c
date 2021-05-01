@@ -56,13 +56,17 @@ void test_sprites_collide(){
     test_init_sprite_param(&crashtest,10,12,21,21);
     test_sprites_collide_param(&cobaye,&crashtest);
 }
-/*
+
 void test_left_limit_screen_param(world_t *world){
-    
+    print_sprite(world->spaceship);
+    left_limit_screen(&world);
+    print_sprite(world->spaceship);
 }
 
-void test_left_limit_screen_param(){
-
+void test_left_limit_screen(){
+    world_t world;
+    test_left_limit_screen_param(&world);
+    test_left_limit_screen_param(&world);
 }
 void test_right_limit_screen_param(){
 
