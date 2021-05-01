@@ -17,7 +17,6 @@ void handle_events(SDL_Event *event,world_t *world){
         if (event->type == SDL_QUIT) {
             //On indique la fin du jeu
             world->gameover = 1;
-			printf("YOU LOST !");
         }
 
          //si une touche est appuyée
@@ -26,7 +25,6 @@ void handle_events(SDL_Event *event,world_t *world){
              if(event->key.keysym.sym == SDLK_ESCAPE){
                  printf("La touche Echap est appuyée\n");
                  world->gameover = 1;
-				 printf("YOU LOST !");
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
@@ -79,14 +77,14 @@ void right_limit_screen(world_t *world){
             }
         }
     } 
-
-Uint32 SDL_GetTicks(void);
+    
+/* Uint32 SDL_GetTicks(void);
 unsigned int time = 0;
-while(sprite_collide(sp1,sp2)){
-	time = SDL_GetTicks();
-	if(sprites_collide(&world->spaceship, &world->finish_line)){
-		printf("YOU WIN %d\n s", time);
-		time = 0;
-	}
-}
+    while (sprite_collide(sp1,sp2)) {
+        time = SDL_GetTicks();
+        if(sprites_collide(&world->spaceship, &world->finish_line)){
+            printf("YOU WIN %d\n s", time);
+            time = 0;
+        }
+    } */
   

@@ -24,7 +24,7 @@ void clean_textures(textures_t *textures){
 }
 
 
-/*void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
     int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
     for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
         int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;//puis en abscisses
@@ -34,7 +34,7 @@ void clean_textures(textures_t *textures){
         }
         y += METEORITE_SIZE;
     }
-} */
+}
 
 void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
     for (int i = 0;i < N;i++){
@@ -51,7 +51,7 @@ void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
 }
 
 void init_textures(SDL_Renderer *renderer, textures_t *textures){
-    load_font()
+    //load_font(); partie 4
     textures->background = load_image( "ressources/space-background.bmp",renderer);
 	textures->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
