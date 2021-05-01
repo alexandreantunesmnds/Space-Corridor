@@ -26,8 +26,12 @@ void print_sprite (sprite_t* sprite){
 }
 
 void init_walls (world_t *world){
-    
-
+    init_sprite(&world->table_murs[0],48,0,96,192);
+    init_sprite(&world->table_murs[1],252,0,96,192);
+    init_sprite(&world->table_murs[2],16,-352,32,160);
+    init_sprite(&world->table_murs[3],188,-352,224,160);
+    init_sprite(&world->table_murs[4],48,-672,96,192);
+    init_sprite(&world->table_murs[5],252,-672,96,192);
 }
 
 void init_data(world_t * world){
@@ -40,15 +44,17 @@ void init_data(world_t * world){
     //Test de la position du vaisseau
     //print_sprite(&(world->spaceship));
     //On place la ligne d'arrivée 
-    init_sprite(&(world->finish_line),SCREEN_WIDTH/2,FINISH_LINE_HEIGHT,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
+    init_sprite(&(world->finish_line),SCREEN_WIDTH/2,-960,SCREEN_WIDTH,FINISH_LINE_HEIGHT);
     world->finish_line.visible = 0;
     //Test de la position de la ligne d'arrivée
     //print_sprite(&(world->finish_line));
     //on initialise la vitesse de déplacement
     world->vy = INITIAL_SPEED;
     //on place le mur de météorites
-    init_sprite(&world->mur, SCREEN_WIDTH/2-METEORITE_SIZE/2, SCREEN_HEIGHT/2, 3*METEORITE_SIZE, 7*METEORITE_SIZE);
-    world->mur.visible = 0;
+    /*init_sprite(&world->mur, SCREEN_WIDTH/2-METEORITE_SIZE/2, SCREEN_HEIGHT/2, 3*METEORITE_SIZE, 7*METEORITE_SIZE);
+    world->mur.visible = 0;*/
+    //on place le tableau de murs
+    init_walls(world);
 }
 
 
@@ -64,7 +70,9 @@ int is_game_over(world_t *world){
 
 void update_data(world_t *world){
     world->finish_line.y += world->vy;
-    world->mur.y += world->vy;
+    for (int i = 0;i < N;i++){
+        world->table_murs[i].y += world->vy;
+    }
     //gestion de la collision
     handle_sprites_collision(&world->spaceship, &world->mur,world,1);
     handle_sprites_collision(&world->spaceship, &world->finish_line,world,0);

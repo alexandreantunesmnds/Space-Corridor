@@ -5,6 +5,7 @@
  * \date 14 Avril 2021
  */
 #include "sdl2-light.h"
+#include"sdl2-ttf-light.h"
 #include "constantes.h"
 #include "world.h"
 #include "graphic.h"
@@ -23,7 +24,7 @@ void clean_textures(textures_t *textures){
 }
 
 
-void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+/*void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
     int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
     for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
         int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;//puis en abscisses
@@ -33,10 +34,24 @@ void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
         }
         y += METEORITE_SIZE;
     }
+} */
+
+void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+    for (int i = 0;i < N;i++){
+        int y = world->table_murs[i].y - world->table_murs[i].h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
+        for(int j = 0 ; j < world->table_murs[i].h/METEORITE_SIZE ; j++){
+            int x = world->table_murs[i].x - world->table_murs[i].w/2 + METEORITE_SIZE/2;//puis en abscisses
+            for(int i = 0 ; i < world->table_murs[i].w/METEORITE_SIZE ; i++){
+                apply_texture(textures->meteorite, renderer, x, y);
+                x += METEORITE_SIZE;
+            }
+            y += METEORITE_SIZE;
+        }
+    }
 }
 
-
 void init_textures(SDL_Renderer *renderer, textures_t *textures){
+    load_font()
     textures->background = load_image( "ressources/space-background.bmp",renderer);
 	textures->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
@@ -63,6 +78,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     //application des textures des météorites selon la taille et la largeur du mur de météorites
     build_wall(renderer, world,textures);
+    //application des textures du tableau de météorites selon la taille et la largeur du mur de météorites
+    apply_wall(renderer,world,textures);
     // on met à jour l'écran
     update_screen(renderer);
 }
@@ -76,6 +93,7 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, textures_t *textures, wo
 
 
 void init(SDL_Window **window, SDL_Renderer ** renderer, textures_t *textures, world_t * world){
+    init_ttf();
     init_sdl(window,renderer,SCREEN_WIDTH, SCREEN_HEIGHT);
 	init_data(world);
     init_textures(*renderer,textures);
