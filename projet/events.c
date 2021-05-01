@@ -81,12 +81,11 @@ void right_limit_screen(world_t *world){
     } 
 
 Uint32 SDL_GetTicks(void);
-unsigned int time = 0;
-while(sprite_collide(sp1,sp2)){
-	time = SDL_GetTicks();
+unsigned int timer = 0,currentTime;
+	currentTime = SDL_GetTicks();
 	if(sprites_collide(&world->spaceship, &world->finish_line)){
-		printf("YOU WIN %d\n s", time);
-		time = 0;
+		printf("YOU WIN %d\n s", currentTime);
+		timer = 0;
 	}
 }
   
