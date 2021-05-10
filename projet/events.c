@@ -62,7 +62,6 @@ void right_limit_screen(world_t *world){
     int sprites_collide(sprite_t *sp1, sprite_t *sp2){
         if (((abs(sp1->x - sp2->x)) <= (sp1->w + sp2->w)/2) && ((abs(sp1->y - sp2->y)) <= (sp1->h + sp2->h)/2)){ // si il y a collision entre les deux sprites
             return 1;
-			
         }
         else{
             return 0;
@@ -76,15 +75,5 @@ void right_limit_screen(world_t *world){
                 sp1->visible = 1; //on fait disparaitre le premier sprite
             }
         }
-    } 
-    
-/* Uint32 SDL_GetTicks(void);
-unsigned int time = 0;
-    while (sprite_collide(sp1,sp2)) {
-        time = SDL_GetTicks();
-        if(sprites_collide(&world->spaceship, &world->finish_line)){
-            printf("YOU WIN %d\n s", time);
-            time = 0;
-        }
-    } */
+    }
   

@@ -29,7 +29,7 @@ void init_walls (world_t *world){
     init_sprite(&world->table_murs[0],48,0,96,192);
     init_sprite(&world->table_murs[1],252,0,96,192);
     init_sprite(&world->table_murs[2],16,-352,32,160);
-    init_sprite(&world->table_murs[3],188,-352,32,160);
+    init_sprite(&world->table_murs[3],188,-352,224,160);
     init_sprite(&world->table_murs[4],48,-672,96,192);
     init_sprite(&world->table_murs[5],252,-672,96,192);
 }

@@ -21,43 +21,51 @@ void clean_textures(textures_t *textures){
     clean_texture(textures->spaceship);
 	clean_texture(textures->finish_line);
     clean_texture(textures->meteorite);
+    clean_font(textures->font);
 }
 
-
+/*
 void build_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
-    int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
-    for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
-        int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;//puis en abscisses
-        for(int i = 0 ; i < world->mur.w/METEORITE_SIZE ; i++){
-            apply_texture(textures->meteorite, renderer, x, y);
-            x += METEORITE_SIZE;
-        }
-        y += METEORITE_SIZE;
-    }
-}
-
-void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures){
-    for (int i = 0;i < N;i++){
-        int y = world->table_murs[i].y - world->table_murs[i].h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
-        for(int j = 0 ; j < world->table_murs[i].h/METEORITE_SIZE ; j++){
-            int x = world->table_murs[i].x - world->table_murs[i].w/2 + METEORITE_SIZE/2;//puis en abscisses
-            for(int i = 0 ; i < world->table_murs[i].w/METEORITE_SIZE ; i++){
+    for (int i = 0;i < N ;i++){
+        int y = world->mur.y - world->mur.h/2 + METEORITE_SIZE/2; // on determine la place que vas occuper le mur en ordonnée
+        for(int j = 0 ; j < world->mur.h/METEORITE_SIZE ; j++){
+            int x = world->mur.x - world->mur.w/2 + METEORITE_SIZE/2;//puis en abscisses
+            for(int i = 0 ; i < world->mur.w/METEORITE_SIZE ; i++){
                 apply_texture(textures->meteorite, renderer, x, y);
                 x += METEORITE_SIZE;
             }
             y += METEORITE_SIZE;
         }
     }
+}*/
+
+void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures, int k){
+    int h = world->table_murs[k].h; //Nombre max de météores en hauteur
+    int w = world->table_murs[k].w; //Nombre max de météores en largeur
+
+    int x = world->table_murs[k].x - w/2 + METEORITE_SIZE/2;
+    int y = world->table_murs[k].y - h/2 + METEORITE_SIZE/2;
+
+    for (int i = 0 ; i < h/METEORITE_SIZE ; i ++){
+        for (int j = 0 ; j < w/METEORITE_SIZE ; j++){
+            apply_texture(textures->meteorite,renderer, x + j*METEORITE_SIZE, y + i*METEORITE_SIZE);
+        }
+    }
+}
+
+void apply_walls(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+    for (int k = 0 ; k < N ; k ++){
+        apply_wall(renderer, world, textures, k);
+    }
 }
 
 void init_textures(SDL_Renderer *renderer, textures_t *textures){
-    //load_font(); partie 4
+    load_font("ressources/arial.ttf",14);
     textures->background = load_image( "ressources/space-background.bmp",renderer);
 	textures->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
     textures->meteorite = load_image( "ressources/meteorite.bmp",renderer);
 
-    
 }
 
 
@@ -77,9 +85,9 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     apply_sprite(textures->spaceship, renderer, &(world->spaceship));
     apply_sprite(textures->finish_line, renderer,&(world->finish_line));
     //application des textures des météorites selon la taille et la largeur du mur de météorites
-    build_wall(renderer, world,textures);
+    //build_wall(renderer, world,textures);
     //application des textures du tableau de météorites selon la taille et la largeur du mur de météorites
-    apply_wall(renderer,world,textures);
+    apply_walls(renderer,world,textures);
     // on met à jour l'écran
     update_screen(renderer);
 }
