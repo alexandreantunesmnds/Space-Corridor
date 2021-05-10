@@ -28,10 +28,10 @@ int main( int argc, char* args[] )
     //initialisation du jeu
     init(&window,&renderer,&textures,&world);
 	
-	Uint32 SDL_GetTicks(void);
+	/*Uint32 SDL_GetTicks(void);
     unsigned int timer = 0,time;
 	time = SDL_GetTicks();
-	printf("YOU WIN %d\n s", time);
+	printf("YOU WIN %d\n s", time);*/
     
     while(!is_game_over(&world)){ //tant que le jeu n'est pas fini
         

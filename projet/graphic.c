@@ -43,8 +43,8 @@ void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures, int
     int h = world->table_murs[k].h; //Nombre max de météores en hauteur
     int w = world->table_murs[k].w; //Nombre max de météores en largeur
 
-    int x = world->table_murs[k].x - w/2 + METEORITE_SIZE/2;
-    int y = world->table_murs[k].y - h/2 + METEORITE_SIZE/2;
+    int x = world->table_murs[k].x - w/2;
+    int y = world->table_murs[k].y - h/2;
 
     for (int i = 0 ; i < h/METEORITE_SIZE ; i ++){
         for (int j = 0 ; j < w/METEORITE_SIZE ; j++){
@@ -56,6 +56,18 @@ void apply_wall(SDL_Renderer *renderer, world_t *world,textures_t *textures, int
 void apply_walls(SDL_Renderer *renderer, world_t *world,textures_t *textures){
     for (int k = 0 ; k < N ; k ++){
         apply_wall(renderer, world, textures, k);
+    }
+}
+
+void message(SDL_Renderer *renderer, world_t *world,textures_t *textures){
+      char text[20];
+    if (world->gameover==1){
+        sprintf(text,"You finished in %d s!",world->time);
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,150,60,text,textures->font);
+    }
+    else if (world->gameover==2){
+        sprintf(text,"You lose!");
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,textures->font);
     }
 }
 
@@ -88,6 +100,12 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,textures_t *texture
     //build_wall(renderer, world,textures);
     //application des textures du tableau de météorites selon la taille et la largeur du mur de météorites
     apply_walls(renderer,world,textures);
+    //Affichage du chronomètre
+    char text[20];
+    sprintf(text,"Timer:%d",timer(world));
+    apply_text(renderer,10,10,100,50,text,textures->font);
+    //message de fin
+    message(renderer,world,textures);
     // on met à jour l'écran
     update_screen(renderer);
 }

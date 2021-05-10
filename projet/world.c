@@ -57,6 +57,13 @@ void init_data(world_t * world){
     init_walls(world);
 }
 
+int timer(world_t *world){
+  if (world->vy!=0){
+      world->time=SDL_GetTicks()/1000;
+  }
+  printf("\n timer: %d \n",world->time);
+  return world->time;
+}
 
 void clean_data(world_t *world){
     /* utile uniquement si vous avez fait de l'allocation dynamique (malloc); la fonction ici doit permettre de libérer la mémoire (free) */

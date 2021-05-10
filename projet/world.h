@@ -36,7 +36,7 @@ struct world_s{
     sprite_t mur; /*!< Champ indiquant le mur de météorites */
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
 	sprite_t table_murs[5]; /*!< Champ correspondant au tableau de météorites*/
-	//int time;
+	int time;
 };
 
 /**
@@ -98,5 +98,5 @@ void update_data(world_t *world);
  */
 void init_walls (world_t *world);
 
-//int timer(world_t *world);
+int timer(world_t *world);
 #endif

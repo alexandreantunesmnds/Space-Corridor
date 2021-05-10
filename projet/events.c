@@ -71,16 +71,14 @@ void right_limit_screen(world_t *world){
     void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){
         if (sprites_collide(sp1,sp2)){
             world->vy = 0;
+            world->gameover=1;
             if (make_disappear == 1){
                 sp1->visible = 1; //on fait disparaitre le premier sprite
+                world->gameover=2;
             }
         }
-<<<<<<< HEAD
     }
-  
-=======
-    } 
-
+/*
 Uint32 SDL_GetTicks(void);
 unsigned int timer = 0,currentTime;
 	currentTime = SDL_GetTicks();
@@ -88,5 +86,4 @@ unsigned int timer = 0,currentTime;
 		printf("YOU WIN %d\n s", currentTime);
 		timer = 0;
 	}
-}
->>>>>>> 85c77e43b0eac2fbb93e70ebc9aa5c88cb6f655b
+}*/
