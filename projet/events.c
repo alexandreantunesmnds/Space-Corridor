@@ -75,5 +75,18 @@ void right_limit_screen(world_t *world){
                 sp1->visible = 1; //on fait disparaitre le premier sprite
             }
         }
+<<<<<<< HEAD
     }
   
+=======
+    } 
+
+Uint32 SDL_GetTicks(void);
+unsigned int timer = 0,currentTime;
+	currentTime = SDL_GetTicks();
+	if(sprites_collide(&world->spaceship, &world->finish_line)){
+		printf("YOU WIN %d\n s", currentTime);
+		timer = 0;
+	}
+}
+>>>>>>> 85c77e43b0eac2fbb93e70ebc9aa5c88cb6f655b
