@@ -35,7 +35,7 @@ struct world_s{
 	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
     sprite_t mur; /*!< Champ indiquant le mur de météorites */
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
-	sprite_t table_murs[5]; /*!< Champ correspondant au tableau de météorites*/
+	sprite_t table_murs[N]; /*!< Champ correspondant au tableau de météorites*/
 	int time;
 };
 

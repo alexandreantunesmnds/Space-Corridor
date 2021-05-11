@@ -72,7 +72,7 @@ void message(SDL_Renderer *renderer, world_t *world,textures_t *textures){
 }
 
 void init_textures(SDL_Renderer *renderer, textures_t *textures){
-    load_font("ressources/arial.ttf",14);
+    textures->font = load_font("ressources/arial.ttf",14);
     textures->background = load_image( "ressources/space-background.bmp",renderer);
 	textures->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	textures->finish_line = load_image( "ressources/finish_line.bmp",renderer);
