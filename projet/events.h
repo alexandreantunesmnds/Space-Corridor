@@ -42,8 +42,9 @@ void right_limit_screen(world_t *world);
  * \param sp1 sprite 1
  * \param sp2 sprite 2 
  * \param world les données du monde
+ * \param make_disappear paramètre à 1 fait dispara$itre le sprite
  */
  void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear);
 
-
+ //void wait_gamefinish (world_t* world);
  #endif

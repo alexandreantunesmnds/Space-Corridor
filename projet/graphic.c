@@ -9,6 +9,7 @@
 #include "constantes.h"
 #include "world.h"
 #include "graphic.h"
+#include "events.h"
 
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
     if (sprite->visible == 0){
@@ -87,6 +88,18 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources){
     }
 }
 
+void wait_game(world_t *world){
+    if (sprites_collide(&world->spaceship,&world->finish_line)){ // si collision alors fin du jeu
+        printf("On est arrivé ! \n");
+        pause(1000);
+    }
+    for (int i = 0;i < N;i++){
+        if (sprites_collide(&world->spaceship,&world->table_murs[i])){
+            printf("Perdu ! \n");
+            pause(2000);
+        }
+    }
+}
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resources){
     
     //on vide le renderer
@@ -108,6 +121,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resour
     messages(renderer,world,resources);
     // on met à jour l'écran
     update_screen(renderer);
+    //fermeture de l'application 2 secondes après si fin du jeu
+    wait_game(world);
 }
 
 

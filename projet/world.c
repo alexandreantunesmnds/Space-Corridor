@@ -61,7 +61,7 @@ int timer(world_t *world){
   if (world->vy!=0){
       world->time=SDL_GetTicks()/1000;
   }
-  printf("\n timer: %d \n",world->time);
+  //printf("\n timer: %d \n",world->time);
   return world->time;
 }
 
@@ -78,7 +78,7 @@ void update_data(world_t *world){
     world->finish_line.y += world->vy;
     for (int i = 0;i < N;i++){
         world->table_murs[i].y += world->vy;
-        handle_sprites_collision(&world->spaceship, &world->table_murs[i],world,1);
+        handle_sprites_collision(&world->spaceship, &world->table_murs[i],world,1); //gestion de la collision pour tous les murs et on passe le paramètre disappear à 1 pour demander à faire disparaître le vaisseau
     }
     //gestion de la collision
     handle_sprites_collision(&world->spaceship, &world->finish_line,world,0);

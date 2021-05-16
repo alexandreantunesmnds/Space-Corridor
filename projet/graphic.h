@@ -66,7 +66,11 @@ void init_resources(SDL_Renderer *renderer, resources_t *resources);
 */
 
 void apply_background(SDL_Renderer *renderer, resources_t *resources);
-
+/**
+ * \brief La fonction fait attendre 2 secondes après la fin du jeu et on affiche un message côté terminal
+ * \param world les données du monde
+ */
+void wait_game(world_t *world);
 /**
  * \brief La fonction rafraichit l'écran en fonction de l'état des données du monde
  * \param renderer le renderer
