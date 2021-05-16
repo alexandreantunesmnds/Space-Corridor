@@ -98,5 +98,9 @@ void update_data(world_t *world);
  */
 void init_walls (world_t *world);
 
+/**
+ * \brief La fonction qui s'occupe du timer
+ * \param world les données du monde
+ */
 int timer(world_t *world);
 #endif
