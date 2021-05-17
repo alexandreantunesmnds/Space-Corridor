@@ -19,7 +19,7 @@ doc: $(PROG)
 	make -C latex
 
 clean:
-	rm -f *~ *.o $(PROG)
+	rm -f *~ *.o *.exe $(PROG)
 	rm -rf latex html
 
 tests: $(TESTS_OBJ)

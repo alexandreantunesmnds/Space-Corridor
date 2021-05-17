@@ -24,7 +24,7 @@ void print_sprite (sprite_t* sprite){
     printf("Hauteur : %d\n",sprite->h);
     printf("Largeur : %d\n",sprite->w);
 }
-
+//on initialise les coordonnées de chaques murs
 void init_walls (world_t *world){
     init_sprite(&world->table_murs[0],48,0,96,192);
     init_sprite(&world->table_murs[1],252,0,96,192);

@@ -70,7 +70,7 @@ void right_limit_screen(world_t *world){
 
     void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){
         if (sprites_collide(sp1,sp2)){
-            world->vy = 0;
+            world->vy = 0; //le cas où le vaisseau touche la finish line on s'arrête juste
             world->gameover=1;
             if (make_disappear == 1){
                 sp1->visible = 1; //on fait disparaitre le premier sprite

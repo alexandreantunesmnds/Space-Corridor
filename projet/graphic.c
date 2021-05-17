@@ -44,8 +44,8 @@ void apply_wall(SDL_Renderer *renderer, world_t *world,resources_t *resources, i
     int h = world->table_murs[k].h; //Nombre max de météores en hauteur
     int w = world->table_murs[k].w; //Nombre max de météores en largeur
 
-    int x = world->table_murs[k].x - w/2;
-    int y = world->table_murs[k].y - h/2;
+    int x = world->table_murs[k].x - w/2; //Taille qu'occupe les murs en largeur 
+    int y = world->table_murs[k].y - h/2; //Taille qu'occupe les murs en hauteur
 
     for (int i = 0 ; i < h/METEORITE_SIZE ; i ++){
         for (int j = 0 ; j < w/METEORITE_SIZE ; j++){
@@ -64,11 +64,11 @@ void messages(SDL_Renderer *renderer, world_t *world,resources_t *resources){
       char text[20];
     if (world->gameover==1){
         sprintf(text,"You finished in %d s!",world->time);
-        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,150,60,text,resources->font);
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,150,60,text,resources->font); //On centre le message
     }
     else if (world->gameover==2){
         sprintf(text,"You lose!");
-        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,resources->font);
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,resources->font); // On centre le message
     }
 }
 
@@ -91,12 +91,12 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources){
 void wait_game(world_t *world){
     if (sprites_collide(&world->spaceship,&world->finish_line)){ // si collision alors fin du jeu
         printf("On est arrivé ! \n");
-        pause(1000);
+        pause(1000); // Attente de 2s
     }
     for (int i = 0;i < N;i++){
         if (sprites_collide(&world->spaceship,&world->table_murs[i])){
             printf("Perdu ! \n");
-            pause(2000);
+            pause(2000); //Attente de 2s
         }
     }
 }
