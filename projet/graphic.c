@@ -22,6 +22,7 @@ void clean_resources(resources_t *resources){
     clean_texture(resources->spaceship);
 	clean_texture(resources->finish_line);
     clean_texture(resources->meteorite);
+    clean_texture(resources->lives);
     clean_font(resources->font);
 }
 
@@ -60,8 +61,20 @@ void apply_walls(SDL_Renderer *renderer, world_t *world,resources_t *resources){
     }
 }
 
+
+void build_lives(SDL_Renderer *renderer, world_t *world,resources_t *resources){
+    int y = SCREEN_HEIGHT-LIVES_SIZE; //on détermine la place que prends les points de vie
+    for(int j = 0 ; j < world->lives.h ; j++){
+            int x = SCREEN_WIDTH - world->NB_LIVES*LIVES_SIZE;
+        for(int i = 0 ; i < world->lives.w ; i++){
+            apply_texture(resources->lives, renderer, x, y);
+            x += LIVES_SIZE;
+    }
+    }
+}
+
 void messages(SDL_Renderer *renderer, world_t *world,resources_t *resources){
-      char text[20];
+    char text[20];
     if (world->gameover==1){
         sprintf(text,"You finished in %d s!",world->time);
         apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,150,60,text,resources->font); //On centre le message
@@ -78,7 +91,7 @@ void init_resources(SDL_Renderer *renderer, resources_t *resources){
 	resources->spaceship = load_image( "ressources/spaceship.bmp",renderer);
 	resources->finish_line = load_image( "ressources/finish_line.bmp",renderer);
     resources->meteorite = load_image( "ressources/meteorite.bmp",renderer);
-
+    resources->lives = load_image( "ressources/3D_heart.bmp",renderer);
 }
 
 
@@ -90,15 +103,11 @@ void apply_background(SDL_Renderer *renderer, resources_t *resources){
 
 void wait_game(world_t *world){
     if (sprites_collide(&world->spaceship,&world->finish_line)){ // si collision alors fin du jeu
-        printf("On est arrivé ! \n");
-        pause(1000); // Attente de 2s
+        pause(2000); // Attente de 2s
     }
-    for (int i = 0;i < N;i++){
-        if (sprites_collide(&world->spaceship,&world->table_murs[i])){
-            printf("Perdu ! \n");
+        if (world->spaceship.x == SCREEN_WIDTH/2 && world->spaceship.y == SCREEN_HEIGHT-SHIP_SIZE && world->NB_LIVES == 0 || (world->time == 5)){
             pause(2000); //Attente de 2s
         }
-    }
 }
 void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resources){
     
@@ -113,6 +122,8 @@ void refresh_graphics(SDL_Renderer *renderer, world_t *world,resources_t *resour
     //build_wall(renderer, world,resources);
     //application des resources du tableau de météorites selon la taille et la largeur du mur de météorites
     apply_walls(renderer,world,resources);
+    //Application des resources du tableau de vies
+    build_lives(renderer,world,resources);
     //Affichage du chronomètre
     char text[20];
     sprintf(text,"Timer:%d",timer(world));
@@ -136,6 +147,7 @@ void clean(SDL_Window *window, SDL_Renderer * renderer, resources_t *resources, 
 void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources, world_t * world){
     init_ttf();
     init_sdl(window,renderer,SCREEN_WIDTH, SCREEN_HEIGHT);
+    init_lives(world);
 	init_data(world);
     init_resources(*renderer,resources);
 }

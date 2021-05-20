@@ -56,3 +56,9 @@
   * \brief Taille du tableau de murs dans la structure world
 */
 #define N 6
+
+/**
+ * \brief Taille de vies
+*/
+
+#define LIVES_SIZE 32

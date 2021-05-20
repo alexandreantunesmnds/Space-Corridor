@@ -33,10 +33,12 @@ struct world_s{
     int gameover; /*!< Champ indiquant si l'on est à la fin du jeu */
 	sprite_t spaceship;  /*!< Champ indiquant le vaisseau */
 	sprite_t finish_line;  /*!< Champ indiquant la ligne d'arrivée */
-    sprite_t mur; /*!< Champ indiquant le mur de météorites */
+	sprite_t lives;
+    //sprite_t mur; /*!< Champ indiquant le mur de météorites */
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
 	sprite_t table_murs[N]; /*!< Champ correspondant au tableau de météorites*/
-	int time;
+	int time; /*!< Champ correspondant au temps du joueur*/
+	int NB_LIVES;
 };
 
 /**
@@ -99,8 +101,16 @@ void update_data(world_t *world);
 void init_walls (world_t *world);
 
 /**
+ * \brief La fonction donne la position des murs pour former un couloir
+ * \param world les données du monde
+ */
+void update_walls (world_t *world);
+/**
  * \brief La fonction qui s'occupe du timer
  * \param world les données du monde
  */
 int timer(world_t *world);
+
+void init_lives(world_t *world);
+
 #endif

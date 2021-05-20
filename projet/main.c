@@ -28,6 +28,8 @@ int main( int argc, char* args[] )
     //initialisation du jeu
     init(&window,&renderer,&resources,&world);
 	
+        if (SDL_Init(SDL_INIT_VIDEO) < 0)
+        return -1;
     
     while(!is_game_over(&world)){ //tant que le jeu n'est pas fini
         

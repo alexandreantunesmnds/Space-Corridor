@@ -8,6 +8,7 @@
 #include "events.h"
 #include "world.h"
 #include "constantes.h"
+#include "graphic.h"
 
 void handle_events(SDL_Event *event,world_t *world){
     Uint8 *keystates;
@@ -67,15 +68,32 @@ void right_limit_screen(world_t *world){
             return 0;
         }
     }
+    void lost_life(world_t* world){
+        if (world->NB_LIVES == 1) {
+            world->gameover=2;
+        }
+        else{
+            world->gameover=0;
+        }
+        world->NB_LIVES--;
+        init_data(world); // on retourne au début du jeu
+    }
 
+    void too_late(world_t* world){
+        if (world->time == 30){
+            world->vy=0;
+            world->gameover=2;
+        }
+    }
     void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){
         if (sprites_collide(sp1,sp2)){
             world->vy = 0; //le cas où le vaisseau touche la finish line on s'arrête juste
             world->gameover=1;
             if (make_disappear == 1){
                 sp1->visible = 1; //on fait disparaitre le premier sprite
-                world->gameover=2;
+                lost_life(world); //on enlève une vie
             }
         }
     }
+
 

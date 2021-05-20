@@ -19,6 +19,7 @@ struct resources_s{
     SDL_Texture* spaceship; /*!< Texture liée au vaisseau*/
 	SDL_Texture* finish_line;/*!< Texture liée à la ligne d'arrivée*/
     SDL_Texture* meteorite; /*!< Texture liée au météorites */
+    SDL_Texture* lives; /*!< Texture liée au météorites */
     TTF_Font* font;
 };
 /**
@@ -107,5 +108,7 @@ void init(SDL_Window **window, SDL_Renderer ** renderer, resources_t *resources,
  * \param world le monde
  */
 void messages(SDL_Renderer *renderer, world_t *world,resources_t *resources);
+
+void build_lives(SDL_Renderer *renderer, world_t *world,resources_t *resources);
 
 #endif
