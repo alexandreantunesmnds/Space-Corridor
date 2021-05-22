@@ -46,7 +46,16 @@ void right_limit_screen(world_t *world);
  */
  void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear);
 
+/**
+ * \brief La fonction met à jour le nombre de vies
+ * \param world données du monde
+ */
  void lost_life(world_t* world);
 
+/**
+ * \brief La fonction passe game over à 2 car perdu si le temps dépassé
+ * \param world données du monde
+ */
  void too_late(world_t* world);
+
  #endif

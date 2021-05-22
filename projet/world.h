@@ -38,7 +38,7 @@ struct world_s{
     int vy; /*!< Champ indiquant le déplacement des objets du monde*/
 	sprite_t table_murs[N]; /*!< Champ correspondant au tableau de météorites*/
 	int time; /*!< Champ correspondant au temps du joueur*/
-	int NB_LIVES;
+	int NB_LIVES; /*!< Champ correspondant au nombre de vie du joueur*/
 };
 
 /**
@@ -111,6 +111,10 @@ void update_walls (world_t *world);
  */
 int timer(world_t *world);
 
+/**
+ * \brief La fonction qui initialise la position des vies
+ * \param world les données du monde
+ */
 void init_lives(world_t *world);
 
 #endif

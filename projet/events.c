@@ -17,7 +17,7 @@ void handle_events(SDL_Event *event,world_t *world){
         //Si l'utilisateur a cliqué sur le X de la fenêtre
         if (event->type == SDL_QUIT) {
             //On indique la fin du jeu
-            world->gameover = 1;
+            world->gameover = 4;
         }
 
          //si une touche est appuyée
@@ -25,7 +25,7 @@ void handle_events(SDL_Event *event,world_t *world){
             //si la touche appuyée est 'Echap'
              if(event->key.keysym.sym == SDLK_ESCAPE){
                  printf("La touche Echap est appuyée\n");
-                 world->gameover = 1;
+                 world->gameover = 4; //afficher que le joueur abandonne
               }
             //si la touche appuyée est 'flèche haut'
              if(event->key.keysym.sym == SDLK_UP){
@@ -68,6 +68,7 @@ void right_limit_screen(world_t *world){
             return 0;
         }
     }
+
     void lost_life(world_t* world){
         if (world->NB_LIVES == 1) {
             world->gameover=2;
@@ -80,9 +81,9 @@ void right_limit_screen(world_t *world){
     }
 
     void too_late(world_t* world){
-        if (world->time == 30){
+        if (world->time == 20){
             world->vy=0;
-            world->gameover=2;
+            world->gameover=3;
         }
     }
     void handle_sprites_collision(sprite_t *sp1, sprite_t *sp2, world_t *world, int make_disappear){

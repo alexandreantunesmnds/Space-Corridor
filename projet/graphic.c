@@ -83,6 +83,14 @@ void messages(SDL_Renderer *renderer, world_t *world,resources_t *resources){
         sprintf(text,"You lose!");
         apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,resources->font); // On centre le message
     }
+    else if (world->gameover==3){
+        sprintf(text,"Too late !");
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,resources->font); // On centre le message
+    }
+    else if (world->gameover==4){
+        sprintf(text,"You quit !");
+        apply_text(renderer,SCREEN_WIDTH/2-110/2,SCREEN_HEIGHT/2-60/2,110,60,text,resources->font); // On centre le message
+    }
 }
 
 void init_resources(SDL_Renderer *renderer, resources_t *resources){
