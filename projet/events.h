@@ -57,5 +57,4 @@ void right_limit_screen(world_t *world);
  * \param world données du monde
  */
  void too_late(world_t* world);
-
  #endif

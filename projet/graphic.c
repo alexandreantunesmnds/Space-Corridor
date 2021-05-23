@@ -13,7 +13,7 @@
 
 void apply_sprite(SDL_Texture *texture,SDL_Renderer *renderer,sprite_t *sprite){
     if (sprite->visible == 0){
-      apply_texture(texture, renderer, sprite->x - sprite->w/2, sprite->y - sprite->h/2) ;
+      apply_texture(texture, renderer, sprite->x - sprite->w/2, sprite->y - sprite->h/2);
     }
 }
 

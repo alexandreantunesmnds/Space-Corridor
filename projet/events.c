@@ -81,7 +81,7 @@ void right_limit_screen(world_t *world){
     }
 
     void too_late(world_t* world){
-        if (world->time == 20){
+        if (world->time == 30){
             world->vy=0;
             world->gameover=3;
         }
