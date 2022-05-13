@@ -12,6 +12,7 @@ Utilisation de la librairie SDL2 afin d'implanter l'interface graphique du jeu
 
 
 Vous avez gagné 😄
+
 ![image](https://user-images.githubusercontent.com/90969081/168392529-deeb27a8-cf03-4c7d-a659-2f8fff59000b.png)
 
 Vous avez perdu 😞
